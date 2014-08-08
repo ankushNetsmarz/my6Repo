@@ -153,8 +153,8 @@ Chandigarh.
 
             if (start == null) {
                 $("#LoginPanel").show();
-           var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
-             db.transaction(queryDB, errorCB);
+          // var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
+           //  db.transaction(queryDB, errorCB);
             }
             else {
 
@@ -165,8 +165,8 @@ Chandigarh.
 
             function loginn() {
 
-          var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
-          db.transaction(queryDB, errorCB);
+         // var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
+         // db.transaction(queryDB, errorCB);
 
             }
 
@@ -456,8 +456,8 @@ Chandigarh.
         });
 
         function createDatabase() {
-         var db = window.openDatabase("Database", "1.0", "UserHistory", 1000000);
-         db.transaction(populateDB, errorCB, successCB);
+        // var db = window.openDatabase("Database", "1.0", "UserHistory", 1000000);
+        // db.transaction(populateDB, errorCB, successCB);
 
         }
 

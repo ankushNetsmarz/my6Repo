@@ -228,9 +228,20 @@ z-index: 11122;
 
  .user-detail{margin:0 16.41% 10px; width:430px; float:left; height:260px; overflow-y:scroll;}
  .user-detail ul{margin:0; padding:0;}
- .user-detail ul li{list-style:none; color:#FFF; padding:0; margin:0; line-height:30px; display:inline-block; border-bottom:1px solid rgba(255, 255, 255, 0.1);}
+ .user-detail ul li{list-style:none; color:#490401; padding:4px 8px; margin:-5px 0 0; line-height:20px; display:inline-block; background:rgba(255, 255, 255, 0.3); text-shadow:0 1px 0 rgba(255, 255, 255, 0.3); font-weight:bold;}
+ .user-detail ul li:nth-child(even){background:rgba(255, 255, 255, 0.5);}
+ .user-detail ul li > .see-link{color:#FFF; width:260px; float:left;}
+ .user-detail ul li > .see-link a{color:#FFF; width:100%; text-align:center;}
  .user-detail ul li > .user-head{width:100px; margin:0 10px 0 0; text-align:left;}
  .user-detail ul li > .user-name{width:320px; margin:0; text-align:left;}
+ 
+ .edit-pro-detail{margin:0 16.41% 10px; width:430px; float:left; height:260px; overflow-y:scroll;}
+ .edit-pro-detail ul{margin:0; padding:0;}
+ .edit-pro-detail ul li{list-style:none; color:#fff; padding:0; margin: 0; line-height:20px; display:inline-block; }
+ .edit-pro-detail ul li > .edit-link{color:#FFF; width:260px; float:left;}
+ .edit-pro-detail ul li > .edit-link a{color:#FFF; width:100%; text-align:center;}
+ .edit-pro-detail ul li > .edit-pro-head{width:100px; margin:0 10px 0 0; text-align:left;}
+ .edit-pro-detail ul li > .edit-pro-name{width:320px; margin:0; text-align:left;}
  
  .image-gallery{width:100%; background:rgba(255, 255, 255, 0); float:left; padding:10px 0;}
  .image-gallery img{width:101px; height:101px; float:left; margin:0 10px 0 0; border-radius:100%; border:3px solid rgba(255, 255, 255, 1);}
@@ -302,7 +313,7 @@ z-index: 11122;
  
  .edit-input{background:rgba(255, 255, 255, 0.2); float: left !important; font-size: 13px !important; height: auto !important; margin:0 0 10px 0 !important; padding:6px 4px; width:86% !important; border:none; color:#FFF;}
   .edit-check{margin:0 0 10px 0 !important;}
- .change-pic{bottom: 0px; background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); font-size: 12px; text-align: center; margin: 0px auto; position: absolute; padding: 4px 37px 18px;}
+ .change-pic{bottom: 0px; background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); font-size: 12px; text-align: center; margin: 0px auto; position: absolute; padding: 4px 17px 18px;}
  .upload-pic{bottom: 0px; background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); font-size: 12px; text-align: center; margin: 0px auto; position: absolute; padding:10px 0; width:100%;}
  
 /*--- full photo screen ---*/ 
@@ -547,6 +558,10 @@ padding:12px 35px; color:#fff; text-align:center; text-transform:uppercase;  mar
  .user-detail{margin:0 auto; width:430px;}
  .user-detail ul li > .user-head{width:100px; margin:0 10px 0 0; text-align:left;}
  .user-detail ul li > .user-name{width:320px; margin:0; text-align:left;}
+ 
+ .edit-pro-detail{margin:0 auto; width:430px;}
+ .edit-pro-detail ul li > .edit-pro-head{width:100px; margin:0 10px 0 0; text-align:left;}
+ .edit-pro-detail ul li > .edit-pro-name{width:320px; margin:0; text-align:left;}
  /*--- see profile screen ---*/
  
  .interest-tab { width:98%;}
@@ -713,16 +728,30 @@ padding:12px 35px; color:#fff; text-align:center; text-transform:uppercase;  mar
  /*--- see profile screen ---*/
 .back_btn_top{ background-position:0px 11px; background-size:65px; height:49px; width:65px; margin:0px 0 0 8px; padding:0 0 0 10px; font-size:13px;}
 .done_btn_top{ background-position:0px 11px; background-size:65px; height:49px; width:65px; margin:0 8px 0 0; padding:0 10px 0 0; font-size:13px;}
-.profile-pic{width:170px; height:170px; margin:0px auto 10px; border-radius:100%; border:4px solid #efefef; overflow:hidden;}
-/*---.profile-pic img{width:102%;}---*/
+.profile-pic{width:125px; height:125px; margin:0px auto 10px; border-radius:100%; border:2px solid #efefef; overflow:hidden;}
+.profile-pic img{width:102%;}
 .profile-img{width:97%; height:160px; margin:0px auto 20px; border:4px solid #efefef; overflow:scroll;}
 .profile-img img{width:100%;}
 
-.user-detail{margin:0 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:218px;}
+.user-detail{margin:6px 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:210px; padding:8px 0;}
  .user-detail ul{margin:0; padding:0;}
- .user-detail ul li{list-style:none; color:#FFF; padding:0; margin:0; line-height:20px; display:inline-block;}
- .user-detail ul li > .user-head{width:80px; margin:0 10px 0 0; text-align:left;}
- .user-detail ul li > .user-name{width:186px; margin:0; text-align:left;}
+ .user-detail ul li{padding:4px 8px; margin:-5px 0 0; line-height:20px; display:inline-block; }
+ .user-detail ul li:nth-child(even){padding:4px 8px; margin:-5px 0 0; line-height:20px; display:inline-block;}
+ .user-detail ul li > .see-link{color:#FFF; width:260px; float:left;}
+ .user-detail ul li > .see-link a{color:#FFF; width:100%; text-align:center;}
+ .user-detail ul li > .user-head{width:65px; margin:0 10px 0 0; text-align:left;}
+ .user-detail ul li > .user-name{width:185px; margin:0; text-align:left;}
+ 
+ .edit-pro-detail{margin:0px 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:248px; padding:8px 0;}
+ .edit-pro-detail ul{margin:0; padding:0;}
+ .edit-pro-detail ul li{padding:4px 8px; margin:-5px 0 0; line-height:20px; display:inline-block; }
+ .edit-pro-detail ul li > .edit-link{color:#FFF; width:260px; float:left;}
+ .edit-pro-detail ul li > .edit-link a{color:#FFF; width:100%; text-align:center;}
+ .edit-pro-detail ul li > .edit-pro-head{width:75px; margin:0 10px 0 0; text-align:left;}
+ .edit-pro-detail ul li > .edit-pro-name{width:175px; margin:0; text-align:left;} 
+ .edit-pro-detail ul li > .edit-pro-name input{width:100% !important; margin:0 !important; text-align:left;}
+ .edit-pro-detail ul li > .edit-status-name{width:185px; margin:4px 16px 0 0; text-align:left;} 
+ .edit-pro-detail ul li > .edit-status-name input{width:100% !important; margin:0 !important; text-align:left;}
  
  .image-gallery{width:100%; float:left; padding:3px 0; overflow-x:scroll;}
  .image-gallery img{width:auto; height:57px; float:left; margin:0 0 0 18px;}
