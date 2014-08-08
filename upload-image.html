@@ -1,0 +1,274 @@
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+ -->
+
+
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MY6</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div>
+<div class="flex" style="display: none;"> </div>
+ <div id="loaderImage" style="display: none;">
+ </div>
+</div>
+       
+    <div class="alert-box" style="display: block">
+        <h4>MY6</h4>
+        <div class="message-area"></div>
+        <div class="alert-btn-area">
+            <button id="okAlert" class="alert-btn" >ok</button>
+           
+        </div>
+    </div>
+    <div class="splash-bg">
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" class="back_btn_top" onclick="back();">Back</button>
+            </div>
+            <div class="top_head_bg">
+                <label class="top_heading">Upload </label>
+            </div>
+            <div class="right-top-btn">
+                <button type="button" class="done_btn_top" id="upload_image">Done</button>
+            </div>
+        </div>
+        <div class="mid_area">
+            <div>
+                <div class="profile-img" onclick="getPhoto(pictureSource.PHOTOLIBRARY);" style="background: #FFF;">
+                    <img id="image" src="">
+                    <div class="upload-pic">Click here for upload pic</div>
+                    </div>
+                <div class="user-detail" style="overflow-y:scroll;">
+                    <ul>
+                     
+                        
+                        <li>
+                            <div class="fl user-head">Title <span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <input id="Title" type="text" alt="" class="edit-input"></div>
+                        </li>
+                        <li>
+                            <div class="fl user-head">Description <span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <textarea id="Description" alt="" class="edit-input"></textarea></div>
+                        </li>
+                        
+                        <li>
+                            <div class="fl user-head">Remarks<span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <input id="Remarks" type="text" alt="" class="edit-input"></div>
+                        </li>
+                        <li>
+                            <div class="fl user-head">For Sale <span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <input status="" id="ForSale" type="checkbox" alt="" class="edit-check"></div>
+                        </li>
+                        <li id="price">
+                            <div class="fl user-head">Price <span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <input id="Price" type="text" alt="" class="edit-input"></div>
+                        </li>
+                        <li>
+                            <div class="fl user-head">Interest <span class="fr">:</span></div>
+
+                            <div class="fl user-name">
+                                <select id="selector">
+                                    <option id="id0" value=""></option>
+                                    <option id="id1" value=""></option>
+                                    <option id="id2" value=""></option>
+                                    <option id="id3" value=""></option>
+                                    <option id="id4" value=""></option>
+                                    <option id="id5" value=""></option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="fl user-head">City <span class="fr">:</span></div>
+                            <div class="fl user-name">
+                                <input id="location" type="text" alt="" class="edit-input"></div>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="clr"></div>
+            </div>
+        </div>
+        <div class="clr"></div>
+    </div>
+  
+    </div>
+   <script src="js/appConfig.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/newsfeed.js"></script>
+    <script src="js/toastr.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+         <script src="js/loader.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        var pictureSource;   // picture source
+        var destinationType; // sets the format of returned value 
+        var imageURL, extension;
+        var flag = false;
+        // Wait for PhoneGap to connect with the device
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // PhoneGap is ready to be used!
+        //
+        function onDeviceReady() {
+
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
+            encodingType = Camera.EncodingType.PNG;
+        }
+
+
+        $(document).ready(function () {
+            $(".alert-box").hide();
+            $("#price").hide();
+            localStorage.setItem("status", "false");
+            document.addEventListener("deviceready", onDeviceReady, false);
+            localStorage.getItem("contentType");
+            var newInterest = JSON.parse(localStorage.getItem("interestResponse"));
+            var newInterestId = JSON.parse(localStorage.getItem("interestResponseId"));
+            localStorage.setItem("interestSelected", newInterestId[0]);
+            for (var i = 0; i < 6; i++) {
+                $("#id" + [i]).text(newInterest[i]);
+                $("#id" + [i]).val(newInterestId[i]);
+            }
+
+            $("#selector").on("click", function () {
+                var select = $(this).val();
+
+                localStorage.setItem("interestSelected", select);
+            });
+
+
+
+
+
+
+            $("#okAlert").on("click", function () {
+                $('.alert-box').hide();
+                $('.flex').css("display", "none");
+
+
+            });
+
+
+            $("#ForSale").on("click", function () {
+         
+                if ($("#ForSale").is(':checked')) {
+               
+                    $("#price").show();
+                    localStorage.setItem("status", "true");
+                }
+                else {
+                    localStorage.setItem("status", "false");
+                    $("#price").hide();
+                }
+            });
+
+            $("#upload_image").on("click", function () {
+
+                title = $("#Title").val();
+
+                if (imageURL == null) {
+                    $('.flex').css("display", "block");
+                    $(".message-area").text("choose photo to upload");
+                    $(".alert-box").show();
+
+
+                }
+                else if (title == "") {
+                    $('.flex').css("display", "block");
+                    $(".message-area").text("title cant be empty");
+                    $(".alert-box").show();
+
+                }
+                else {
+                 var location = $('#location').val();
+
+                    validatelocation(location);                  
+                   
+                }
+
+            });
+        });
+
+
+        function validatelocation(location) {
+
+            var filter = /[a-zA-Z]$/;
+            if (filter.test(location)) {
+                AddFeed(imageURL);
+            }
+            else {
+                $('.flex').css("display", "block");
+                $(".message-area").text('invalid city name');
+                $(".alert-box").show();
+              
+            }
+        }
+
+        function onPhotoURISuccess(imageURI) {
+
+            var largeImage = document.getElementById('image');
+            largeImage.src = "data:image/png;base64," + imageURI;
+            imageURL = imageURI;
+            flag = true;
+            $(".upload-pic").hide();
+            $("#image").each(function () {
+
+                var h = $(this).height();
+                var w = $(this).width();
+
+                if (w > 200) {
+                    $(this).width("100%");
+
+                }
+            });
+
+        }
+
+
+        function getPhoto(source) {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+                quality: 50,
+                destinationType: destinationType.DATA_URL,
+                encodingType: encodingType,
+                sourceType: source
+            });
+        }
+
+
+        function onFail(message) {
+            //  alert('Failed because: ' + message);
+        }
+
+
+
+        function back() {
+            var pathName = window.localStorage.getItem("pathName");
+            window.location.href = pathName;
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!-- 
+netsmartz software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+The page will render google map and will locate your current location.
+Also, there will be 3 buttons on the page.The first button will locate people around 2 km of your current location.The second button, will search for people around 5 km around you.
+The last button will  search people according to the common interest with user.
+ -->
+
+
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Untitled Document</title>
+
+</head>
+
+<body>
+
+    <div>
+        
+        <img name='myImage' src="something.jpg" onload="onResize()" />
+       </div>
+        <script type="text/javascript">
+            window.onresize = onResize;
+            var $img = $('#content img'),
+            imageWidth = $img[0].width, //need the raw width due to a jquery bug that affects chrome
+            imageHeight = $img[0].height, //need the raw height due to a jquery bug that affects chrome
+            maxWidth = $(window).width(),
+            maxHeight = $(window).height(),
+            widthRatio = maxWidth / imageWidth,
+            heightRatio = maxHeight / imageHeight;
+            
+            var ratio = widthRatio; //default to the width ratio until proven wrong
+            
+            if (widthRatio * imageHeight > maxHeight) {
+                ratio = heightRatio;
+            }
+        
+        //now resize the image relative to the ratio
+        $img.attr('width', imageWidth * ratio)
+        .attr('height', imageHeight * ratio);
+        
+        //and center the image vertically and horizontally
+        $img.css({
+                 margin: 'auto',
+                 position: 'absolute',
+                 top: 0,
+                 bottom: 0,
+                 left: 0,
+                 right: 0
+                 });
+        </script>
+</body>
+</html>

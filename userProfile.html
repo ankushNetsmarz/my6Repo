@@ -1,0 +1,209 @@
+﻿<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+ -->
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Untitled Document</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/ratchet.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+       <link href="rating/rateit.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div>
+        <div class="flex" style="display: none;"></div>
+        <div id="loaderImage" style="display: none;">
+        </div>
+    </div>
+
+    <div class="splash-bg">
+
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" class="back_btn_top" id="user" onclick="back();">Back</button></div>
+            <div class="top_head_bg">
+                <label class="top_heading">CONNECT</label></div>
+
+        </div>
+
+        <div class="mid_area">
+
+            <div id="interests" class="modal ModalBackground">
+                <div class="interest-topbar">
+                    <div class="top_head_bg">
+                        <label class="top_heading">MY INTERESTS</label>
+                    </div>
+                    <div class="right-top-btn">
+                        <button type="button" class="done_btn_top"><a href="#interests">Done</a></button>
+                    </div>
+                </div>
+                <div class="mid_area" id="interest_Page">
+                    <div class="interest-box">
+                        <ul>
+                            <li class="li" id="1">
+                                <h4>My Talents</h4>
+                                <div class="talent">
+                                    <div class="talent-icon">
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="li" id="2">
+                                <h4>My arts</h4>
+                                <div class="art">
+                                    <div class="art-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="3">
+                                <h4>My NightLife</h4>
+                                <div class="nightlife">
+                                    <div class="nightlife-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="4">
+                                <h4>My Lifestyle</h4>
+                                <div class="lifestyle">
+                                    <div class="lifestyle-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="5">
+                                <h4>My Resale</h4>
+                                <div class="resale">
+                                    <div class="resale-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="6">
+                                <h4>My Retails</h4>
+                                <div class="retail">
+                                    <div class="retail-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="7">
+                                <h4>My Dating</h4>
+                                <div class="dating">
+                                    <div class="dating-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="8">
+                                <h4>My Sports</h4>
+                                <div class="sport">
+                                    <div class="sport-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="9">
+                                <h4>My Food</h4>
+                                <div class="food">
+                                    <div class="food-icon"></div>
+                                </div>
+
+                            </li>
+                            <li class="li" id="10">
+                                <h4>Entertainment</h4>
+                                <div class="entertain">
+                                    <div class="entertain-icon"></div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+             
+
+            <div class="profile-pic">
+                <img id="profilepic" src="">
+            </div>
+
+            <p class="profile-status"></p>
+            <button class="connect-btn" id="connectButton">Connect</button>
+            <div id="ratingBar">
+               <div class="rateit" id="rateit5" data-rateit-min="" style="float: none; margin: 0px;">
+            </div>
+            <div>
+                <span id="value5"></span><span id="hover5"></span>
+            </div>
+                </div>
+            <div class="user-detail">
+                <ul>
+                    <li>
+                        <div class="fl user-head">Name <span class="fr">:</span></div>
+                        <div class="fl user-name" id="seeName"></div>
+                    </li>
+                    <li>
+                        <div class="fl user-head">Gender <span class="fr">:</span></div>
+                        <div class="fl user-name" id="seeGender"></div>
+                    </li>
+                    <li>
+                        <div class="fl user-head">Location <span class="fr">:</span></div>
+                        <div class="fl user-name" id="seeLocation"></div>
+                    </li>
+
+                    <li>
+                        <div class="fl user-head">DOB <span class="fr">:</span></div>
+                        <div class="fl user-name" id="seeDOB"></div>
+                    </li>
+                    <li>
+                        <div class="fl user-head">Interests <span class="fr">:</span></div>
+                        <div class="fl user-name"><a href="#interests" />click here </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loader.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/userProfile.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/ratchet.js"></script>
+        <script src="rating/jquery.rateit.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            $("#rateit5").rateit('readonly', true);
+            $("#1,#2,#3,#4,#5,#6,#7,#8,#9,#10").hide();    
+            $("#connectButton").hide();
+
+            GetProfileData();   /* getting information about user using web service userProfile.js */
+            isFriend();         /* checking if user is your friend or not, using web-service userProfile.js*/
+
+            $('#connectButton').on("click", function ()
+            {
+                connect();          /*if user is not your friend then only connect button will appear, clicking so will make you his/her friend */
+                $(this).hide();
+
+            });
+        });
+
+        function back() {
+          var pathName = window.localStorage.getItem("pathName");
+          window.location.href = pathName;
+            // $("#interest_done").attr("id", "connect_done");
+            //alert("hello");
+          //  
+
+          
+       //    window.location.replace("ConnectPeople.html");
+
+        }
+
+    </script>
+
+</body>
+</html>

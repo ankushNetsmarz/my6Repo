@@ -1,0 +1,148 @@
+﻿<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+This page shows user's selected interests and corresonding to those interest he can find people of common interests..
+ -->
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/ratchet.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div>
+        <div class="flex" style="display: none;"></div>
+        <div id="loaderImage" style="display: none;">
+        </div>
+    </div>
+
+
+
+    <div class="splash-bg">
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" id="connectBack" class="back_btn_top">Back</button>
+            </div>
+            <div class="top_head_bg">
+                <label class="top_heading">CONNECT</label>
+            </div>
+        </div>
+        <div class="mid_area">
+
+            <div class="interest-tab">
+                <a class="single-item" id="tabIcon0" href="#">
+
+                    <div class="int-icon" id="iconn0">
+                        <div>
+                        </div>
+                    </div>
+                    <div class="tab-text" id="tabb0"></div>
+                </a>
+
+                <a class="single-item" id="tabIcon1" href="#">
+                    <div class="int-icon" id="iconn1">
+                        <div></div>
+                    </div>
+                    <div class="tab-text" id="tabb1"></div>
+                </a>
+
+                <a class="single-item" href="#">
+                    <div class="int-icon" id="iconn2">
+                        <div></div>
+                    </div>
+                    <div class="tab-text" id="tabb2"></div>
+                </a>
+                <a class="single-item" href="#">
+                    <div class="int-icon" id="iconn3">
+                        <div></div>
+                    </div>
+                    <div class="tab-text" id="tabb3"></div>
+                </a>
+                <a class="single-item" href="#">
+                    <div class="int-icon" id="iconn4">
+                        <div></div>
+                    </div>
+                    <div class="tab-text" id="tabb4"></div>
+                </a>
+                <a class="single-item" href="#">
+                    <div class="int-icon" id="iconn5">
+                        <div></div>
+                    </div>
+                    <div class="tab-text" id="tabb5"></div>
+                </a>
+            </div>
+
+            <div>
+            </div>
+     <div style="color:white">Press tab to connect</div>
+            <div class="connect-list-box">
+                <ul class="connect">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loader.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/my6.js"></script>
+    <script src="js/connect.js"></script>
+    <script src="js/appConfig.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script>
+
+        var ids = [];
+        var lengths = 0;
+        var names = [];
+        var newId = [];
+
+
+        var select_ticks, new_id, selecton, select;
+
+        $(document).ready(function () {
+
+            /* getting 2 arrays containing name of interest and its Id */
+
+            var newInterest = JSON.parse(localStorage.getItem("interestResponse"));
+            var newInterestId = JSON.parse(localStorage.getItem("interestResponseId"));
+
+            for (var i = 0; i < 6; i++) {
+                $('#iconn' + i).children().addClass("selected-icon-" + newInterestId[i]);
+                $("#tabb" + i).text(newInterest[i]);
+            }
+
+
+            /* clicking on particular interest will show new people with corresponding interest so as to make him/her as your friend */
+            $(".single-item").on("click", function () {
+
+                $(".single-item").removeClass("active");
+                $(this).addClass("active");
+
+                $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+
+                select = $(this).children().children().attr('class');
+                selecton = select.substring(select.lastIndexOf('-') + 1);
+
+                localStorage.setItem("connectInterestID", selecton);
+                connectPeople(selecton);        /*sending request to connect */
+
+                $(this).children().children().addClass('hover-icon-' + selecton);
+            });
+
+            $("#connectBack").on("click", function () {
+              //  alert("hii");
+                 localStorage.setItem("login", "login");
+               window.location.replace("interest.html");
+            });
+        });
+
+
+    </script>
+</body>
+</html>

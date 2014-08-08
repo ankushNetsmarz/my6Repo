@@ -1,0 +1,933 @@
+﻿
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+ -->
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+  
+    <title>Untitled Document</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/ratchet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+   <script src="js/messagecount.js"></script>
+   
+
+</head>
+
+<body >
+
+  <div>
+<div class="flex" style="display: none;"> </div>
+ <div id="loaderImage" style="display: none;">
+ </div>
+</div>
+       
+
+    <div class="alert-box" style="display:none;">
+        <h4>MY6</h4>
+        <div class="message-area">Do you want to logout?</div>
+        <div class="alert-btn-area">
+            <button id="okAlert" class="alert-btn" type="submit">Confirm</button>
+            <button class="alert-btn" id="cancelAlert">Cancel</button>
+        </div>
+    </div>
+
+    <div class="splash-bg">
+        <div id="left-flyout-nav" class="layout-left-flyout visible-sm">
+        </div>
+        <div class="layout-right-content">
+            <div class="splash-bg">
+                <header class="the-header ">
+                    <!-- <div style="height:30px">title</div>-->
+                    <div class="navbar container">
+                        <div class="interest-topbar" style="position: relative !important;">
+                            <div  class="left-top-btn">
+                                <button id="navigationBar" onclick="getInfo();" type="button" class="menu_btn_top btn-navbar-navtoggle btn-flyout-trigger"></button>
+                                <!--   <button  id="backbutton" style="display:none" type="button" class="back_btn_top" >Back</button>-->
+                                  </div>
+                            <div class="top_head_bg">
+                                <label class="top_heading">SELECT INTEREST</label><br />
+
+                            </div>
+                            <div class="right-top-btn">
+                                <button type="button" class="done_btn_top" id="">Done</button>
+                            </div>
+                        </div>
+                        <!-- Structure -->
+                        <nav class="the-nav splash-bg nav-collapse clearfix">
+                            <ul class="nav nav-pill pull-left">
+                                <li class="dropdown" style="width: 100%;">
+                                    <!--<ul class="nav nav-pill pull-right">-->
+                                    <div onclick="logout();"><a class="logout">Logout</a></div>
+                                    <!--</ul>-->
+                                     <span id="messageCount1"></span>
+                                    <div class="user-pic">
+                                        <img class="users" id="userPic" src="img/white-logo-2.png" />
+                                    </div>
+
+                                    <div class="profile-box">
+                                        <ul class="nav nav-pill pull-right">
+                                            <li onclick="seeProfile();">
+
+                                                <div class="see-profile">
+                                                    <div class="see-profile-icon"></div>
+                                                </div>
+                                                <h5>See Your Profile</h5>
+                                            </li>
+                                            <li onclick="edit();">
+                                                <div class="edit-profile">
+                                                    <div class="edit-profile-icon"></div>
+                                                </div>
+                                                <h5>Edit Your Profile</h5>
+                                            </li>
+                                            <li onclick="uploadImage();">
+                                                <div class="upload-img">
+                                                    <div class="upload-img-icon"></div>
+                                                </div>
+                                                <h5>Upload Images</h5>
+                                            </li>
+                                            <li onclick="uploadVideo();">
+                                                <div class="upload-vdo">
+                                                    <div class="upload-vdo-icon"></div>
+                                                </div>
+                                                <h5>Upload Videos</h5>
+                                            </li>
+                                         
+                                               <li onclick="myfriends();">
+                                                <div class="my-frnd">
+                                                    <div class="my-frnd-icon"></div>
+                                                </div>
+                                                <h5>My Friends</h5>
+                                            </li>
+                                             <li onclick="ConnectPeople();">
+                                                <div class="connect-frnd">
+                                                    <div class="connect-frnd-icon"></div>
+                                                </div>
+                                                <h5>Connect People</h5>
+                                            </li>
+                                               <li onclick="myInbox();">
+                                                <div class="inbox">
+                                                    <div class="inbox-icon"></div>
+                                                </div>
+                                                <h5>Inbox</h5>
+                                            </li>
+                                            <li onclick="About();">
+                                                <div class="about">
+                                                    <div class="about-icon"></div>
+                                                </div>
+                                                <h5>About</h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </nav>
+                    </div>
+                </header>
+                <div id="interest_six" class="splash-bg" style="display:none;font-size: 13px; color: white; width: 100%; height: 40px">
+                    You cannot select more than six interests
+                </div>
+
+                <div class="container">
+                    <div class="mid_area" id="interest_Page">
+
+                        <div class="interest-box">
+                            <ul>
+                                <li class="li" id="1">
+                                    <h4>My Talents</h4>
+                                    <div class="talent">
+                                        <div class="talent-icon">
+                                        </div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="2">
+                                    <h4>My arts</h4>
+                                    <div class="art">
+                                        <div class="art-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="3">
+                                    <h4>My NightLife</h4>
+                                    <div class="nightlife">
+                                        <div class="nightlife-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="4">
+                                    <h4>My Lifestyle</h4>
+                                    <div class="lifestyle">
+                                        <div class="lifestyle-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="5">
+                                    <h4>My Resale</h4>
+                                    <div class="resale">
+                                        <div class="resale-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="6">
+                                    <h4>My Retails</h4>
+                                    <div class="retail">
+                                        <div class="retail-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="7">
+                                    <h4>My Dating</h4>
+                                    <div class="dating">
+                                        <div class="dating-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="8">
+                                    <h4>My Sports</h4>
+                                    <div class="sport">
+                                        <div class="sport-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="9">
+                                    <h4>My Food</h4>
+                                    <div class="food">
+                                        <div class="food-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li" id="10">
+                                    <h4>Entertainment</h4>
+                                    <div class="entertain">
+                                        <div class="entertain-icon"></div>
+                                    </div>
+                                    <div class="tick">
+                                        <div class="unselect-tick">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mid_area" id="newsfeed_Page" style="display:none;width: 100%; float: left; top: 0px">
+       
+        <div class="interest-tab">
+            <a class="single-item" id="tabIcon0" href="#">
+
+                <div class="int-icon" id="iconn0">
+                    <div>
+                    </div>
+                </div>
+                <div class="tab-text" id="tabb0"></div>
+            </a>
+
+            <a class="single-item" id="tabIcon1" href="#">
+                <div class="int-icon" id="iconn1">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tabb1"></div>
+            </a>
+
+            <a class="single-item" href="#">
+                <div class="int-icon" id="iconn2">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tabb2"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="iconn3">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tabb3"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="iconn4">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tabb4"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="iconn5">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tabb5"></div>
+            </a>
+        </div>
+
+
+        <div class="news-list">
+                        
+         </div>
+        </div>
+       
+
+
+    
+    <div class="mid_area" id="connect_Page" style="display:none;width: 100%; float: left; top: 0px">
+        <div class="interest-tab">
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon0">
+                    <div>
+                    </div>
+                </div>
+                <div class="tab-text" id="tab0"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon1">
+                    <div>
+                    </div>
+                </div>
+                <div class="tab-text" id="tab1"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon2">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tab2"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon3">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tab3"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon4">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tab4"></div>
+            </a>
+            <a class="single-item" href="#">
+                <div class="int-icon" id="icon5">
+                    <div></div>
+                </div>
+                <div class="tab-text" id="tab5"></div>
+            </a>
+        </div>
+             <div style="color:white">Press tab to connect</div>
+                 <div  class="connect-list-box" id="profileInfo">
+        <div class="profile-pic">
+<img id="profilepic" src="">
+</div>
+            <button class="connect-btn" id="pp">cancel</button>
+
+<button class="connect-btn" id="connectButton">Connect</button>
+   
+<div class="user-detail">
+<ul>
+<li>
+<div class="fl user-head">Name <span class="fr">:</span></div>
+<div class="fl user-name" id="seeName"></div>
+</li>
+<li>
+<div class="fl user-head">Gender <span class="fr">:</span></div>
+<div class="fl user-name" id="seeGender"></div>
+</li>
+<li>
+<div class="fl user-head">Location <span class="fr">:</span></div>
+<div class="fl user-name" id="seeLocation"></div>
+</li>
+
+    <li>
+<div class="fl user-head">DOB <span class="fr">:</span></div>
+<div class="fl user-name" id="seeDOB"></div>
+</li>
+<li>
+<div class="fl user-head">Interests <span class="fr">:</span></div>
+<div class="fl user-name" id="seeinterest"></div>
+</li>
+</ul>
+</div>
+            </div>
+        <div class="connect-list-box">
+            <ul class="connect">
+               
+            </ul>
+
+        
+        </div>
+    </div>
+          <script src="js/appConfig.js"></script>
+    <script src="js/connect.js"></script>
+    <script type="text/javascript" src="iscroll.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/jquery.cbFlyout.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ratchet.js"></script>
+    <script src="openfb.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/my6.js"></script>
+    <script src="js/newsfeed.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/toastr.min.js"></script>
+    
+    <script src="js/userProfile.js"></script>
+       <script>
+
+           var ids = [];
+           var lengths = 0;
+           var names = [];
+           var newId = [];
+           var flag = 0;
+           var flag0 = 0;
+           var flag1 = 0;
+           var flag2 = 0;
+           var flag3 = 0;
+           var flag4 = 0;
+           var flag5 = 0;
+           var myScroll;
+
+           var select_ticks, new_id, selecton, select;
+
+           var selecton = 0;
+
+
+
+
+
+
+           $(document).ready(function () {
+            
+               setInterval(function () {
+                   getUnreadMessageCount();
+               }
+               , 5 * 60 * 1000);
+
+
+               $("#profileInfo").hide();
+
+               $("#pp").click(function () {
+
+                   $("#profileInfo").slideUp(1000);
+               });
+               $("#connectButton").show();
+
+               $("#loaderImage").css("display", "none");
+               localStorage.setItem("faceBookUrl", "");
+
+
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+
+
+
+               /* hiding the done button initially*/
+               var login_Page = window.localStorage.getItem("login");
+
+               if (login_Page == "login") {
+
+                   GetFeeds(1,10);
+
+                   $(".left-top-btn").show();
+                   $(".top_heading").text("NEWS FEED");
+                   $(".done_btn_top").removeClass('done_btn_top').addClass("map_btn_top").text('');
+                   $(".map_btn_top").css("display", "block");
+
+                   var newInterest = JSON.parse(localStorage.getItem("interestResponse"));
+                   var newInterestId = JSON.parse(localStorage.getItem("interestResponseId"));
+
+
+                   for (var i = 0; i < 6; i++) {
+                       $('#iconn' + i).children().addClass("selected-icon-" + newInterestId[i]);
+                       $("#tabb" + i).text(newInterest[i]);
+                   }
+
+
+                   $("#interest_Page").replaceWith($("#newsfeed_Page"));
+                   $("#newsfeed_Page").css("display", "block");
+               }
+               else {
+
+                   $("#interest_six").css("display", "none");
+                   $(".done_btn_top").css("display", "none");
+                   $(".done_btn_top").attr("id", "interest_done");
+                   $("#newsfeed_Page,#connect_Page").css("display", "none");
+                
+                   var back = localStorage.getItem("back");
+                   if (back = "back") {
+                       $("#navigationBar").hide();
+                       $("#backbutton").css("display", "block");
+
+                   }
+                   else {
+                       $(".left-top-btn").hide();
+                   }
+               }
+
+           });
+
+           $("#iconn0").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag0 == 0) {
+                   hover(selecton);
+                   flag0 = 1;
+               }
+               else if (flag0 == 1) {
+
+                   selected(selecton);
+                   flag0 = 0;
+               }
+
+           });
+           $('#connectButton').on("click", function () {
+               connect();
+             
+               connectPeople(selecton);
+               $("#profileInfo").slideUp(1000);
+            //  $(this).hide();
+
+           });
+
+
+           $("#iconn1").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag1 == 0) {
+
+                   hover(selecton);
+                   flag1 = 1;
+               }
+               else if (flag1 == 1) {
+                   selected(selecton);
+                   flag1 = 0;
+               }
+           });
+
+           $("#iconn2").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag2 == 0) {
+
+                   hover(selecton);
+                   flag2 = 1;
+               }
+               else if (flag2 == 1) {
+
+                   selected(selecton);
+                   flag2 = 0;
+               }
+
+           });
+
+           $("#iconn3").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag3 == 0) {
+
+                   hover(selecton);
+                   flag3 = 1;
+               }
+               else if (flag3 == 1) {
+
+                   selected(selecton);
+                   flag3 = 0;
+               }
+
+           });
+           $("#iconn4").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag4 == 0) {
+
+                   hover(selecton);
+                   flag4 = 1;
+               }
+               else if (flag4 == 1) {
+
+                   selected(selecton);
+                   flag4 = 0;
+               }
+
+           });
+           $("#iconn5").on("click", function () {
+               clickIcon = $(this);
+               $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+               $(".interest-tab").children().removeClass("active");
+               select = $(this).children().attr('class');
+               selecton = select.substring(select.lastIndexOf('-') + 1);
+               if (flag5 == 0) {
+                   hover(selecton);
+                   flag5 = 1;
+               }
+               else if (flag5 == 1) {
+
+                   selected(selecton);
+                   flag5 = 0;
+               }
+
+           });
+
+
+           function selected(selecton) {
+
+               clickIcon.parent().removeClass("active");
+               clickIcon.children().removeClass('hover-icon-' + selecton);
+               clickIcon.children().addClass('selected-icon-' + selecton);
+               localStorage.setItem("interestId", "null");
+              localStorage.setItem("new_start", "new_start");
+               GetFeeds(1,10);
+           }
+           function hover(selecton) {
+
+               // $(".single-item").removeClass("active");
+               clickIcon.parent().addClass("active");
+               clickIcon.children().addClass('hover-icon-' + selecton);
+               localStorage.setItem("interestId", selecton);
+               localStorage.setItem("new_start", "new_start");
+               GetFeeds(1,10);
+           }
+
+
+           $(".single-item").on("click", function () {
+
+               var pages = localStorage.getItem("page");
+
+               if (pages == "connect") {
+
+                   $(".single-item").removeClass("active");
+                   $(this).addClass("active");
+
+                   $(".interest-tab").children().children().children().removeClass('hover-icon-' + selecton);
+
+                   select = $(this).children().children().attr('class');
+                   selecton = select.substring(select.lastIndexOf('-') + 1);
+
+                   localStorage.setItem("connectInterestID", selecton);
+
+                   connectPeople(selecton);
+
+                   $(this).children().children().addClass('hover-icon-' + selecton);
+
+               }
+
+
+           });
+
+
+
+           $(document).on("click", "#connect_done", function () {
+
+               $("#connect_done").attr("id", "map_done");
+               $("#connect_Page").animate({ "margin-left": "-=80%" }, 700, loginConnect);
+               $(this).removeClass('done_btn_top').addClass("map_btn_top").text('');
+               $(".map_btn_top").css("display", "block");
+               $(".top_heading").text("NEWS FEEDS");
+               $("#interest_six").css("display", "none");
+               localStorage.setItem("login", "login");
+             //  GetUserData();
+               localStorage.setItem("page", "news");
+
+               new_id = JSON.parse(localStorage.getItem("newId"));
+
+               var item = JSON.parse(localStorage.getItem("test"));
+
+
+               for (i = 0; i < 6; i++) {
+                   $('#iconn' + i).children().addClass("selected-icon-" + new_id[i]);
+                   $("#tabb" + i).text(item[i]);
+               }
+           });
+
+           $(document).on("click", ".map_btn_top", function () {
+
+               window.location.replace("map.html");
+           });
+
+
+
+
+           $(document).on("click", "#interest_done", function () {
+               $("#navigationBar").show();
+               $("#backbutton").css("display", "none");
+               AddInterests();
+
+               GetUserData();
+               $("#interest_Page").animate({ "margin-left": "-=80%" }, 700, logins);
+               $(".top_heading").text("CONNECT");
+               $("#interest_six").css("display", "none");
+               $("#interest_done").attr("id", "connect_done");
+               localStorage.setItem("page", "connect");
+
+
+               new_id = JSON.parse(localStorage.getItem("newId"));
+               var item = JSON.parse(localStorage.getItem("test"));
+
+               for (i = 0; i < 6; i++) {
+                   $('#icon' + i).children().addClass("selected-icon-" + new_id[i]);
+                   $("#tab" + i).text(item[i]);
+               }
+           });
+
+          
+
+
+           function getInfo() {
+
+               var urls = localStorage.getItem("ProfilePic");
+               var new_Img = document.getElementById("userPic");
+               new_Img.src = urls;
+
+
+
+           }
+
+           function logins() {
+               $("#interest_Page").replaceWith($("#connect_Page"));
+               $(".left-top-btn").hide();
+               $("#connect_Page").css("display", "block");
+           }
+           function loginConnect() {
+               $(".left-top-btn").show();
+               $("#connect_Page").replaceWith($("#newsfeed_Page"));
+               GetFeeds(1,10);
+               $("#newsfeed_Page").css("display", "block");
+
+           }
+           /*
+           clicking on particular interest box in interest page."
+           cases will work according to user's interest.
+           */
+           function ConnectPeople() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("ConnectPeople.html");
+           }
+           function myfriends() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("myfriends.html");
+           }
+
+
+           function seeProfile() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("see-profile.html");
+           }
+
+           function myInbox() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("inbox.html");
+           }
+           function edit() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("edit-profile.html");
+           }
+           function uploadImage() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("upload-image.html");
+           }
+           function uploadVideo() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("upload-video.html");
+               localStorage.setItem("contentType", "video");
+
+           }
+           function About() {
+               localStorage.setItem("login", "login");
+               var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+               window.localStorage.setItem("pathName", pathName);
+               window.location.replace("about.html");
+
+
+           }
+           function logout() {
+
+               $('.flex').css("display", "block");
+               $('.alert-box').css("display", "block");
+               // alert("Do you want to logout?");
+
+               $("#okAlert").on("click", function () {
+
+                   var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
+                   db.transaction(populateDBLogout, errorCB, successLogout);
+
+                   function populateDBLogout(tx) {
+
+                       tx.executeSql('DROP TABLE IF EXISTS UserHistory');
+                   }
+                   function errorCB(err) {
+                   }
+
+                   function successLogout() {
+                       localStorage.clear();
+
+                       window.location.replace("login.html");
+                   }
+
+
+               });
+
+              
+
+               $("#cancelAlert").on("click", function () {
+                   $(".alert-box").css("display", "none");
+                   $('.flex').css("display", "none");
+               });
+           }
+
+
+           $(document).on("click", "#backbutton", function () {
+              window.location.replace("edit-profile.html");
+
+           });
+
+           $('.li').on("click", function () {
+               var cases = $(this).find('.unselect-tick,.select-tick').attr('class');
+               switch (cases) {
+                   /* if user hasn't selected the interest box*/
+                   case 'unselect-tick':
+                       select_ticks = $(this).find('.unselect-tick').removeClass("unselect-tick").addClass("select-tick");
+
+                       /*if user has not selected more than 6 interest box*/
+                       if (lengths < 6) {
+
+                           ids.push(select_ticks);
+                           lengths = ids.length;
+                           var TalentNames = $(this).find('h4').text();
+
+
+                           var check = true;
+                           for (var i = 0; i <= names.length; i++) {
+                               if (names[i] == TalentNames) {
+                                   check == false;
+                                   return;
+                               }
+
+                           }
+                           if (check) {
+                               names.push(TalentNames);
+                               newId.push($(this).attr('id'));
+
+                           }
+                           localStorage.setItem("test", JSON.stringify(names));
+                           localStorage.setItem("newId", JSON.stringify(newId));
+
+                       }
+
+                           /*if user tries to slect more than 6 interest */
+                       else {
+
+                           $(this).find('.select-tick').removeClass("select-tick").addClass("unselect-tick");
+                           $("#interest_six").css("display", "block");
+                           break;
+                       }
+
+                       /*if user selects exactly the 6 interests */
+                       if (lengths == 6) {
+                           $(".done_btn_top").css("display", "block");
+                       }
+                       break;
+
+                       /* if user wants to unselect the selected one*/
+                   case 'select-tick':
+
+                       $(this).find('.select-tick').removeClass("select-tick").addClass("unselect-tick");
+                       ids.splice(select_ticks, 1);
+                       var removeItem = $(this).find('h4').text();
+                       names.splice($.inArray(removeItem, names), 1);
+
+                       var tls = $(this).attr('id');
+                       newId.splice($.inArray(tls, newId), 1);
+                       localStorage.setItem("test", JSON.stringify(names));
+                       localStorage.setItem("newId", JSON.stringify(newId));
+
+
+                       $(".done_btn_top").css("display", "none");
+                       $("#interest_six").css("display", "none");
+                       lengths = ids.length;
+                       break;
+
+               }
+
+           });
+
+
+
+           //$(document).on("click", ".connect-pic", function () {
+              
+           //    var profile = $(this).attr('userId');
+           //    localStorage.setItem("profileId", profile);
+           //    var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+           //    window.localStorage.setItem("pathName", pathName);
+           //    window.location.replace("userProfile.html");
+           //});
+
+
+           $(document).on("click", ".connect-pic", function () {
+               var profile = $(this).attr('userId');
+               localStorage.setItem("profileId", profile);        
+               $("#profileInfo").slideDown(1000);
+               GetProfileDataConnect(profile);
+           });
+    </script>
+</body>
+</html>

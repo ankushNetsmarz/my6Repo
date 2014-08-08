@@ -1,0 +1,53 @@
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+The page shows brief information about the application.
+ -->
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="splash-bg">
+  <div class="interest-topbar">
+    <div class="left-top-btn">
+      <button type="button" class="back_btn_top" onclick="back();">Back</button>
+    </div>
+    <div class="top_head_bg">
+      <label class="top_heading">ABOUT MY6</label>
+    </div>
+  </div>
+  
+  <div class="mid_area">
+    <div>
+      <div align="center"><img src="img/splash-logo.png" style="width:35%;"></div>
+      <div style="margin: 0px 10px; font-size: 13px; overflow-y: scroll; height: 290px;">
+        <p><!-- content can be replacable -->
+           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="js/jquery-2.0.2.js"></script>
+     <script>
+     
+          // the function will go back to previous page/ home screen 
+          
+          function back()  
+          {
+            var pathName = window.localStorage.getItem("pathName");
+            window.location.href = pathName;
+          }
+    </script>
+</body>
+</html>

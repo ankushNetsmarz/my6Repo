@@ -1,0 +1,61 @@
+﻿<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+ -->
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/ratchet.css" rel="stylesheet" />
+     <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+<div>
+<div class="flex" style="display: none;"> </div>
+ <div id="loaderImage" style="display: none;">
+ </div>
+</div>
+       
+<div class="splash-bg">
+  <div class="interest-topbar">
+    <div class="left-top-btn">
+      <button type="button" class="back_btn_top" onclick="back();">Back</button>
+    </div>
+    <div class="top_head_bg">
+      <label class="top_heading">My friends</label>
+    </div>
+  </div>
+  <div class="mid_area">
+  
+ 
+          <div  class="connect-list-box">
+            <ul id="myfriends">
+             
+            </ul>
+        </div>
+      </div></div>
+
+ <script src="js/loader.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/myFriends.js"></script>
+    <script src="js/appConfig.js"></script>
+   <script src="js/toastr.min.js"></script>
+<script>
+ 
+    $(document).ready(function () {
+        getFriends();
+    });
+
+    function back() {
+      window.location.replace("interest.html");
+    }
+
+ </script>
+</body>
+</html>

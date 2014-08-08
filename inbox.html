@@ -1,0 +1,104 @@
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+ -->
+
+
+
+
+<!DOCTYPE html">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<div>
+<div class="flex" style="display: none;"> </div>
+ <div id="loaderImage" style="display: none;">
+ </div>
+</div>
+       
+
+     <div class="splash-bg">
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" class="back_btn_top" onclick="back();">Back</button>
+            </div>
+            <div class="top_head_bg">
+                <label class="top_heading">INBOX</label>
+            </div>
+        </div>
+        <div class="mid_area">
+        <div style="overflow-y: scroll; height: 410px;">
+        <div class="message-area">
+        </div>
+        <div id="message">
+            <div class="comment-type-box">
+                <div class="fl comment-name">
+                    <textarea alt="" id='messageText' class="edit-input" placeholder="Type message" style="width: 100% !important;"></textarea>
+                </div>
+            </div>
+            <div class="clr"></div>
+            <div>
+                <a id="sendMessage" class="signup-btn fr">send</a>
+            </div>
+            <a id="cancelInbox" class="signup-btn fl">Cancel</a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="js/loader.js"></script>
+    <script src="js/getMessage.js" type="text/javascript"></script>
+    <script src="js/jquery-2.0.2.js" type="text/javascript"></script>
+    <script src="js/message.js"></script>
+    <script src="js/getConversation.js"></script>
+    <script src="js/toastr.min.js"></script>
+       <script src="js/appConfig.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+       
+            $("#message").hide();
+            GetMessage();
+        });
+
+        function back() {
+            $("#message").hide();
+           window.location.replace("interest.html");
+        }
+
+        $(document).on("click", ".getConversation", function () {
+            var FeedId = $(this).attr('feedid');
+           
+            var conversation = $(this).attr('conversationid');
+            var sender = $(this).attr('sender');
+            var reciever = $(this).attr('Reciever');
+
+                       
+            localStorage.setItem("userIdFeed", sender);
+            localStorage.setItem("feedId", FeedId);
+            localStorage.setItem("sender", sender);
+            localStorage.setItem("reciever", reciever);
+        
+            GetConversation(conversation);
+        });
+        $("#sendMessage").on("click", function () {
+
+          SendMessageThread();
+            GetMessage();
+        });
+
+        $("#cancelInbox").on("click", function () {
+            $("#messageText").val('');
+        });
+
+    </script>
+
+    <script src="js/loader.js"></script>
+</body>
+</html>

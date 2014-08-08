@@ -1,0 +1,312 @@
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+This page shows the description of particular feed i.2 full photo or a video, its title, description,cost if any.
+ Also you can comment and like the feed from here only.
+ -->
+
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Untitled Document</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+     <link href="rating/rateit.css" rel="stylesheet" type="text/css">
+    <link href="css/ratchet.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div>
+        <div class="flex" style="display: none;"></div>
+        <div id="loaderImage" style="display: none;">
+        </div>
+    </div>
+
+     <div class="alert-box" style="display:none;">
+        <h4>MY6</h4>
+        <div class="message-area">Do you want to rate it <div id="rateValue"> </div></div>
+        <div class="alert-btn-area">
+            <button id="okAlert" class="alert-btn" type="submit">Confirm</button>
+            <button class="alert-btn" id="cancelAlert">Cancel</button>
+        </div>
+    </div>
+
+
+
+    <div class="splash-bg">
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" class="back_btn_top" onclick="back();">Back</button>
+            </div>
+            <div class="top_head_bg">
+                <label class="top_heading"></label>
+            </div>
+
+            <div class="right-top-btn">
+                <a href="#messageModal" id="message">
+                    <button type="button" class="msg_btn_top" id=""></button>
+                </a>
+            </div>
+        </div>
+
+       <div class="mid_area">
+            <div class="pic-updater">
+                <img src="" class="news-pro-pc" id="senderPic">
+                <div class="sender-name">
+                    <h4 id="sendername"></h4>
+                    <h4 id="locationSender"></h4>
+                </div>
+                <div class="clr"></div>
+            </div>
+
+
+
+            <div class="describe-pic">
+                <div class="describe-img">
+                    <img id="image" src="" />
+                    <div class="video">
+                        <video width="298" height="240" controls>
+                            <source id="video" src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="describe-data">
+                    <p style="color: white" id="title">
+                    <p style="color: white" id="description">
+                </div>
+
+            </div>
+            <div id="ratingBar">
+               <div class="rateit" id="rateit5" data-rateit-min="">
+            </div>
+        <!--    <div>
+                <span id="value5"></span><span id="hover5"></span>
+            </div>-->
+                </div>
+
+
+            <div class="pic-btns">
+                <a href="#" class="like-click-btn like ">APPLAUSE
+                </a>
+                <a href="#modal" class="comment-click-btn comment">COMMENTS
+                </a>
+                <div class="clr"></div>
+
+          
+            </div>
+
+            <div class="pic-btns-2">
+                <a href="#" class="applause-click-btn like ">APPLAUSE</a>
+                <a href="#modal" class="talk-click-btn comment">COMMENTS</a>
+                <a href="#" class="dollar-btn" id="dollar">$</a>
+                <div class="clr"></div>
+            </div>
+
+
+            <div id="messageModal" class=" modal ModalBackground">
+                <div class="comment-type-box">
+                    <div class="fl comment-name">
+                        <textarea alt="" id='messageText' class="edit-input" placeholder="Type message" style="width: 100% !important;"></textarea>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div style="position: absolute; bottom: 10px; width: 100%;">
+                    <a id="sendMessage" class="signup-btn fr" style="margin:0 10px 0 0;">send</a>
+                <a id="cancelMessage" href="#messageModal" class="signup-btn fl" style="margin:0 0 0 10px;">Cancel</a>
+
+                </div>
+                
+
+            </div>
+        </div>
+
+        <div id="modal" class=" modal ModalBackground">
+
+            <div class='comment-list-area-main' style="height: 290px; overflow-y: scroll">
+            </div>
+
+            <div class="comment-type-box">
+                <div class="fl comment-name">
+                    <textarea alt="" id='commentOnFeed' class="edit-input" placeholder="Comment" style="width: 100% !important;"></textarea>
+                </div>
+            </div>
+            <div class="clr"></div>
+                <div class="clr"></div>    <div class="clr"></div>    <div class="clr"></div>    <div class="clr"></div>
+                <div class="clr"></div>
+            <div style="position: absolute; bottom: 10px; width: 100%;">
+                <a href="#modal" onclick="cancelComment();" class="signup-btn fl" style="margin:0 0 0 10px;">Cancel</a>
+                <a id="CommentButton" class="signup-btn fr" style="margin:0 10px 0 0;">post</a>
+            </div>
+        </div>
+
+        <div class="clr"></div>
+    </div>
+
+    <script src="js/feedliked.js"></script>
+    <script src="js/ratchet.js"></script>
+    <script src="js/jquery-2.0.2.js"></script>
+    <script src="js/like.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/appConfig.js"></script>
+    <script src="js/rating.js"></script>
+    <script>
+        var rateValue=0;
+        $(document).ready(function () {
+        
+            $("#message").hide();
+            $(".pic-btns,.pic-btns-2").hide();
+
+            var userfeedId = localStorage.getItem("userIdFeed");
+            var feedId = localStorage.getItem("feedId");
+            var userId = localStorage.getItem("userId");
+
+            GetProfileDataForRating(userfeedId);
+
+            /*calling function to web-service so as to check if feed is already liked or not */
+            isFeedLiked(feedId, userId);
+
+            /*checking if the feed is user's own feed , if yes the message icon should be hidden*/
+            if (userfeedId == userId) {
+                $("#message").hide();
+                $("#ratingBar").hide();
+
+            }
+            else {
+                $("#message").show();
+                $("#ratingBar").show();
+            }
+
+
+            var sender = localStorage.getItem("senderName");
+            var profile = localStorage.getItem("profilePhoto");
+            var title = localStorage.getItem("title");
+            var description = localStorage.getItem("description");
+            var price = localStorage.getItem("price");
+            var location = localStorage.getItem("location");
+            if (location != "null") {
+                $("#locationSender").text(location);
+            }
+
+            if (price == "0") {
+                $(".pic-btns").show();
+
+            }
+            else {
+
+                $(".pic-btns-2").show();
+                $("#dollar").text("$" + price);
+            }
+
+
+            $("#loaderImage").hide();
+            var path = localStorage.getItem("pathImage");
+           
+            GetComments();
+
+            /* setting image to on full screen*/
+            var new_Img = document.getElementById("image");
+            new_Img.src = path;
+
+            /* checking if the content is video or an image*/
+            var vid = $("#image").prop('src');
+            var vid_new = vid.substring(vid.lastIndexOf('.'));
+            if (vid_new == ".mp4") {
+                $("#image").hide();
+                $("#video").parent().prop('src', vid);
+            }
+            else {
+                $(".video").hide();
+            }
+
+            /* checking the actuak size of image, if image is > 200 the width will be set to 100%*/
+            $("#image").each(function () {
+                var w = $(this).width();
+                if (w > 200) {
+                    $(this).width("100%");
+
+                }
+            });
+
+            var new_ImgPic = document.getElementById("senderPic");
+            new_ImgPic.src = profile;
+
+            $("#sendername").text(sender);
+            $("#title").text(title);
+            $("#description").text(description);
+
+
+            /* like button on [particular feed*/
+            $(".like").on("click", function () {
+
+                if (flaglike != 1)
+                {
+                    LikeFeed();
+                }
+            });
+
+            $("#okAlert").on("click", function () {
+                $(".alert-box").css("display", "none");
+                AddUserRating(userfeedId, rateValue, userId);
+            });
+
+            $("#cancelAlert").on("click", function () {
+                $(".alert-box").css("display", "none");
+            });
+
+            /*sending message to user of feed. */
+            $("#sendMessage").on("click", function () {
+                SendMessage();
+                $("#messageText").val('');
+
+            });
+
+
+            /* cancel message */
+            $("#cancelMessage").on("click", function () {
+                $("#messageText").val('');
+            });
+
+
+            /*commenting on particular feed */
+            $("#CommentButton").on("click", function () {
+                CommentOnFeed();
+            });
+
+
+
+            $("#rateit5").bind('rated', function (event, value) {
+                rateValue = value;
+                $('#value5').text('You\'ve rated it: ' + value);
+                $("#rateValue").text(rateValue + "?");
+                $(".alert-box").css("display", "block");
+                });
+            $("#rateit5").bind('reset', function () { $('#value5').text('Rating reset'); });
+         
+        });
+
+           /*cancel text  */
+              function cancelComment()
+                 {
+                   $("#commentOnFeed").val('');
+                 }
+
+           /*going back to previous page */
+              function back()
+              {
+                var pathName = window.localStorage.getItem("pathName");
+                window.location.href = pathName;
+              }
+
+    </script>
+      <script src="rating/jquery.rateit.js" type="text/javascript"></script>
+
+    <script src="js/message.js"></script>
+    <script src="js/my6.js"></script>
+    <script src="js/toastr.min.js"></script>
+</body>
+</html>

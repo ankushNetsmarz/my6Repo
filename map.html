@@ -1,0 +1,217 @@
+<!-- 
+Weexcel software Limited,
+Sector-7C, Madhya Marg,
+Chandigarh.
+The page will render google map and will locate your current location.
+Also, there will be 3 buttons on the page.The first button will locate people around 2 km of your current location.The second button, will search for people around 5 km around you.
+The last button will  search people according to the common interest with user.
+ -->
+
+
+
+
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Untitled Document</title>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/ratchet.css" rel="stylesheet" type="text/css">
+    <link href="css/toastr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div>
+        <div class="flex" style="display: none;"></div>
+        <div id="loaderImage" style="display: none;">
+        </div>
+    </div>
+
+    <div class="splash-bg">
+        <div class="interest-topbar">
+            <div class="left-top-btn">
+                <button type="button" class="back_btn_top" onclick="back();">Back</button>
+            </div>
+            <div class="top_head_bg">
+                <label class="top_heading">Search By Map</label>
+            </div>
+        </div>
+        <div class="mid_area">
+            <div class="map-area" id="mapContainer">
+            </div>
+
+            <div class="map-btn">
+                <a href="#">
+                    <div class="need-acnt" onclick="searchNearBy();">Search at my location</div>
+                </a>
+                <a href="#">
+                    <div class="need-acnt" onclick="searchNearLocation();">Search near to my location</div>
+                </a>
+                <a href="#">
+                    <div class="need-acnt" onclick="searchNearinterest();">Search based on my Interest</div>
+                </a>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div id="profile_area" style="z-index: 100" class="modal ModalBackground">
+        </div>
+
+        <script src="js/loader.js"></script>
+        <script src="js/map.js"></script>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="js/jquery-2.0.2.js"></script>
+        <script src="js/userProfile.js"></script>
+        <script src="js/toastr.min.js"></script>
+        <script src="js/ratchet.js"></script>
+        <script src="js/appConfig.js"></script>
+        <script type="text/javascript">
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker;
+            var geocoder;
+            var map;
+            var coords;
+            var latitude;
+            var longitude;
+            var flag = 0;
+
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+
+
+                if (navigator.geolocation) {
+
+                    //Use HTML5 Geolocation API To Get Current Position
+                    navigator.geolocation.getCurrentPosition(function (position) {
+
+                        //Get Latitude From Geolocation API
+                        latitude = position.coords.latitude;
+
+                        //Get Longitude From Geolocation API
+                        longitude = position.coords.longitude;
+
+                        //Define New Google Map With Lat / Lon
+                        coords = new google.maps.LatLng(latitude, longitude);
+
+                        var mapOptions = {
+                            zoom: 8,
+                            center: coords
+                        }
+
+                        localStorage.setItem("latitude", latitude);
+                        localStorage.setItem("longitude", longitude);
+
+                        map = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
+                        codeLatLng();
+                    });
+                }
+            }
+
+            function codeLatLng() {
+                if (flag == 1) {
+                    distance = 2;
+                    FindPeopleByProximitySearch(distance);   /* searching for people around distance of 2 metre.*/ 
+                }
+                else if (flag == 2) {
+                    distance = 5;
+                    FindPeopleByProximitySearch(distance);   /* searching for people around distance of 5 metre.*/
+                }
+                else if (flag == 3) {
+                    findPeople();                            /* searching for people according to common interest of user*/
+                }
+
+                else {
+
+                    geocoder.geocode({ 'latLng': coords }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[1]) {
+                                map.setZoom(11);
+
+                                marker = new google.maps.Marker({
+                                    position: coords,
+                                    map: map
+                                });
+                                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+                                var address = results[1].formatted_address;
+
+                                localStorage.setItem("address", address);
+                                setLocation();  //setting current location of user
+
+                                google.maps.event.addListener(marker, 'click', function () {
+
+                                    map.setZoom(16);
+                                    map.setCenter(marker.getPosition());
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: '<div style="width:130px;"><p style="color:blue;"> I am here </p></div>'
+                                    });
+
+
+
+                                    infowindow.open(map, marker);
+
+                                });
+                            }
+                        } else {
+                            // alert("Geocoder failed due to: " + status);
+                        }
+                    });
+                }
+            }
+
+            function searchNearBy() {
+                flag = 1;
+                initialize();
+
+            }
+
+            function searchNearLocation() {
+                flag = 2;
+                initialize();
+
+            }
+            function searchNearinterest() {
+
+                flag = 3;
+                initialize();
+            }
+
+            //Once Page Is Populated - Initiate jQuery
+            $(document).ready(function () {
+                // initializes the map automatically when the page will render.
+                initialize();
+
+                var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
+                window.localStorage.setItem("pathName", pathName);
+
+                $(window).resize(function () {
+                    initialize();
+
+                });
+
+            });
+
+
+            function back() {
+                //   var pathName = window.localStorage.getItem("pathName");
+                window.location.href = "interest.html";
+            }
+
+            /* clicking on window popup of particular user , you will find a new page showing information about user. */
+            $(document).on("click", ".infowindow", function () {
+
+                var profileId = ($(this).attr('id'));
+                localStorage.setItem("profileId", profileId);
+
+                window.location.replace("userProfile.html");
+            });
+        </script>
+</body>
+</html>

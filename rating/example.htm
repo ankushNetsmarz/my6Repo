@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>RateIt</title>
+    <link href="rateit.css" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+   
+    <ul >
+        <li >          
+           <div class="rateit" id="rateit5" data-rateit-min="">
+            </div>
+            <div>
+                <span id="value5"></span><span id="hover5"></span>
+            </div>
+
+            <script type="text/javascript">
+                $("#rateit5").bind('rated', function (event, value) {
+                    $('#value5').text('You\'ve rated it: ' + value);
+
+                });
+                $("#rateit5").bind('reset', function () { $('#value5').text('Rating reset'); });
+                $("#rateit5").bind('over', function (event, value) { $('#hover5').text('Hovering over: ' + value); });
+            </script>      
+        </li>
+        
+    </ul>
+
+    <script src="jquery.rateit.js" type="text/javascript"></script>
+
+ 
+</body>
+</html>
