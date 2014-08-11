@@ -485,15 +485,13 @@ input[type="button"] {
 }
 
 .bar {
-  position: fixed;
-  right: 0;
-  left: 0;
+  position:relative;
   z-index: 10;
   height: 44px;
   padding-right: 10px;
   padding-left: 10px;
-  border-bottom: 1px solid #dddddd;
-  background-color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin:0 0 15px;
 }
 
 .bar-header-secondary {
@@ -921,8 +919,7 @@ select {
   overflow: hidden;
   font-size: 12px;
   font-weight: 400;
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color:none;
   border-radius: 3px;
 }
 .segmented-control .control-item {
@@ -932,20 +929,21 @@ select {
   padding-top: 6px;
   padding-bottom: 7px;
   line-height: 1;
-  color: #333;
+  color: #fff;
   text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #fff;
+  background:rgba(255, 255, 255, 0.4);
 }
 .segmented-control .control-item:first-child {
   border-left-width: 0;
 }
 .segmented-control .control-item:active {
-  background-color: #eee;
+  background-color:rgba(73, 4, 1, 0.4) !important;
 }
 .segmented-control .control-item.active {
-  background-color: #ccc;
+  background:rgba(73, 4, 1, 0.4) !important;
 }
 
 .segmented-control-primary {
