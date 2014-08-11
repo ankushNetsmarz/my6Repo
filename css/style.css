@@ -360,7 +360,9 @@ z-index: 11122;
  .gallery-box ul li h5{text-align:center; color:#d07301; text-transform:capitalize; font-family:'Open Sans', sans-serif; font-weight:normal; margin:0;}
  .load-more{position:absolute; bottom:15px; margin:0 auto; text-align:center; width:100%;}
  .load-more a{padding:7px 15px; background:rgba(255, 255, 255, 0.4); color:#fff; font-size:12px; font-weight:bold;}
-
+ 
+ .view-gall{padding:0; background:rgba(255, 255, 255, 0); color:#fff; font-size:12px; font-weight:bold; margin:0; height:30px; width:33px;}
+.rate-gall{margin:0 16.41% 10px; width:430px; float:left;}
  
  @media only screen and (max-width: 1136px) and (max-height: 640px) and (orientation : landscape){
  body{height:100%;}
@@ -833,6 +835,7 @@ padding:12px 35px; color:#fff; text-align:center; text-transform:uppercase;  mar
 .gallery-box ul li{margin:0 0 15px 30px; padding:0; list-style:none; float:left; width:115px; cursor:pointer; position:relative;}
 .gallery-pic{width:115px; height:90px; margin:0 auto; border:1px solid #efefef; overflow:hidden;}
 .gallery-pic img{width:100%;}
+.rate-gall{margin:0 7% 0; width:276px; float:left; font-size:13px; padding:0 0;}
   }
   
   /* iPads (landscape) ----------- */
