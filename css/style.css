@@ -242,6 +242,8 @@ z-index: 11122;
  .edit-pro-detail ul li > .edit-link a{color:#FFF; width:100%; text-align:center;}
  .edit-pro-detail ul li > .edit-pro-head{width:100px; margin:0 10px 0 0; text-align:left;}
  .edit-pro-detail ul li > .edit-pro-name{width:320px; margin:0; text-align:left;}
+ .edit-pro-detail ul li > .edit-pro-name input{background:none !important; border-bottom:1px solid rgba(255, 255, 255, 0.4) !important; padding:0;}
+ .edit-pro-detail ul li > .edit-pro-name textarea{background:none !important; border-bottom:1px solid rgba(255, 255, 255, 0.4) !important; padding:0; width:100% !important; height:15px !important; margin:0 !important;}
  
  .image-gallery{width:100%; background:rgba(255, 255, 255, 0); float:left; padding:10px 0;}
  .image-gallery img{width:101px; height:101px; float:left; margin:0 10px 0 0; border-radius:100%; border:3px solid rgba(255, 255, 255, 1);}
@@ -311,7 +313,7 @@ z-index: 11122;
     .suggested-txt {text-align: center; width: 50%;}
  /*--- news feeds screen ---*/
  
- .edit-input{background:rgba(255, 255, 255, 0.2); float: left !important; font-size: 13px !important; height: auto !important; margin:0 0 10px 0 !important; padding:6px 4px; width:86% !important; border:none; color:#FFF;}
+ .edit-input{background:rgba(255, 255, 255, 0.2); float: left !important; font-size: 13px !important; height: auto !important; margin:0 0 10px 0 !important; padding:5px 4px; width:86% !important; border:none; color:#FFF;}
   .edit-check{margin:0 0 10px 0 !important;}
  .change-pic{bottom: 0px; background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); font-size: 12px; text-align: center; margin: 0px auto; position: absolute; padding: 4px 17px 18px;}
  .upload-pic{bottom: 0px; background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); font-size: 12px; text-align: center; margin: 0px auto; position: absolute; padding:10px 0; width:100%;}
@@ -363,6 +365,10 @@ z-index: 11122;
  
  .view-gall{padding:0; background:rgba(255, 255, 255, 0); color:#fff; font-size:12px; font-weight:bold; margin:0; height:30px; width:33px;}
 .rate-gall{margin:0 16.41% 10px; width:430px; float:left;}
+
+.msg-count-main{margin:15px 10px !important; position:relative;}
+.msg-count-main img{z-index:9;}
+.msg-count{background:#490401; border-radius: 50%; margin:0px; padding: 1px 7px; color:#FFF; position:absolute; right:26px; z-index:99; top:-10px; font-size:14px; font-weight:bold;}
  
  @media only screen and (max-width: 1136px) and (max-height: 640px) and (orientation : landscape){
  body{height:100%;}
@@ -748,7 +754,7 @@ padding:12px 35px; color:#fff; text-align:center; text-transform:uppercase;  mar
 .done_btn_top{ background-position:0px 11px; background-size:65px; height:49px; width:65px; margin:0 8px 0 0; padding:0 10px 0 0; font-size:13px;}
 .profile-pic{width:125px; height:125px; margin:0px auto 10px; border-radius:100%; border:2px solid #efefef; overflow:hidden;}
 .profile-pic img{width:102%;}
-.profile-img{width:97%; height:160px; margin:0px auto 20px; border:4px solid #efefef; overflow:scroll;}
+.profile-img{width:97%; height:160px; margin:0px auto 12px; border:4px solid #efefef; overflow:scroll;}
 .profile-img img{width:100%;}
 
 .user-detail{margin:6px 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:210px; padding:8px 0;}
@@ -760,7 +766,7 @@ padding:12px 35px; color:#fff; text-align:center; text-transform:uppercase;  mar
  .user-detail ul li > .user-head{width:65px; margin:0 10px 0 0; text-align:left;}
  .user-detail ul li > .user-name{width:185px; margin:0; text-align:left;}
  
- .edit-pro-detail{margin:0px 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:248px; padding:8px 0;}
+ .edit-pro-detail{margin:0px 7% 11px; width:276px; float:left; font-size:13px; overflow-y:scroll; height:211px; padding:8px 0;}
  .edit-pro-detail ul{margin:0; padding:0;}
  .edit-pro-detail ul li{padding:4px 8px; margin:-5px 0 0; line-height:20px; display:inline-block; }
  .edit-pro-detail ul li > .edit-link{color:#FFF; width:260px; float:left;}
