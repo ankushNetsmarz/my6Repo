@@ -1,622 +1,1250 @@
-<!-- 
-Weexcel software Limited,
-Sector-7C, Madhya Marg,
-Chandigarh.
+<!--
+ 
+ Weexcel software Limited,
+ 
+ Sector-7C, Madhya Marg,
+ 
+ Chandigarh.
+ 
  -->
 
 
 
 
+
+
+
+
+
 <!doctype html>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Untitled Document</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/ratchet.css" rel="stylesheet" />
-    <link href="css/toastr.min.css" rel="stylesheet" />
-</head>
-
-<body>
-
-<div> 
-<div class="flex" style="display: none;"> </div>
- <div id="loaderImage" style="display: none;">
- </div>
-</div>
-       
-
-    <div class="alert-box" >
-        <h4>MY6</h4>
-        <div class="message-area"></div>
-        <div class="alert-btn-area">
-            <button id="okAlert" class="alert-btn" >ok</button>
-           
-        </div>
-    </div>
-    <!--  main div class -->
-    <div class="splash-bg">
-
-        <!--  logo is first displayed as splash screen 
-     <div id="logoPanel" style="width: 100%; float: left">
-            <div class="logo">
-                <img src="img/splash-logo.png">
-            </div>
-        </div>-->
-
-        <!-- Login div; user can input registered username and email -->
-        <div id="LoginPanel" style="width: 100%; float: left; margin-right: 100%;" class="overflow-div">
-            <div class="logo-login">
-                <img src="img/splash-logo.png">
-            </div>
-            <div class="lowerContent signin-form">
-
-                <!--  email textbox -->
-
-                <div class="username-txt">
-                    <input id="emailLogin" type="email" placeholder="Email" class="user-input" alt="">
-                </div>
-
-
-
-                <!-- password textbox -->
-                <div class="pswd-txt">
-                    <input id="passwordLogin" class="user-password" type="password" placeholder="Password" alt="">
-                </div>
-
-                <div>
-                    <!-- login Button -->
-                    <div class="login-btn fl" id="login" data-transition="fade">Login</div>
-                    <!-- cancel Button -->
-                    <div id="cancel" class="login-btn fr">Cancel</div>
-                    <div class="clr"></div>
-                </div>
-
-                <!-- login through Facebook -->
-                <div class="or" style="color: white">Or</div>
-                 <div class="facebook" style="color: white" onclick="login();">
-                    Sign in with                 
-                     <a>
-                         <img src="img/facebook-icon-white.png" class="fr" onclick="login();"></a>
-                </div>
-
-                <!-- Need an account button -->
-                <a href="#SignUp">
-                    <div class="need-acnt" onclick="javascript:cancel();">Need An Account?</div>
-                </a>
-            </div>
-        </div>
-
-
-        <!-- Sign Up div; -->
-        <div id="SignUp" style="width: 100%; float: left;z-index:100" class=" modal ModalBackground overflow-div">
-            <div class="splash-bg">
-                <div class="logo-login">
-                    <img id="images" src="img/splash-logo.png" />
-                </div>
-
-                <div class="lowerContent signup-form">
-
-                    <div class="signup-first-txt">
-                        <input id="Firsti" class="user-input" type="text" placeholder="Enter First Name" />
-                    </div>
-
-
-                    <div class="signup-last-txt">
-                        <input class="user-input" id="Lasts" type="text" placeholder="Enter Last Name" />
-                    </div>
-
-
-                    <div class="signup-email-txt">
-                        <input class="user-input" id="emails" type="email" placeholder="Email" />
-                    </div>
-
-
-                    <div class="signup-pswd-txt">
-                        <input class="user-input" id="UserPassword" type="password" placeholder="Password" />
-                    </div>
-
-
-                    <div class="signup-pswd-txt">
-                        <input id="PasswordConfirm" class="user-input" type="password" placeholder="Confirm Password" />
-                    </div>
-
-                    <a href="#SignUp" id="cancelSubmit" class="signup-btn fl">Cancel</a>
-                    <a id="submit" class="signup-btn fr">Submit</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
- 
-
-    <script src="js/ratchet.js"></script>
-    <script src="js/jquery-2.0.2.js"></script>
-    <script src="cordova.js"></script>
-    <script src="openfb.js"></script>
-    <script src="js/loader.js"></script>
-    <script src="js/toastr.min.js"></script>
-   <script src="js/appConfig.js"></script>
-    <script>
-
-        var flag = 0;
-        $(document).ready(function () {
-
-            // alert(localStorage.getItem("email"));
-            $(".alert-box").hide();
-            $("#LoginPanel,#loaderImage").hide();
-
-
-
-            var start = localStorage.getItem("start");
-
-            if (start == null) {
-                $("#LoginPanel").show();
-          // var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
-           //  db.transaction(queryDB, errorCB);
-            }
-            else {
-
-                $("#logoPanel").hide();
-                $("#LoginPanel").show();
-
-            }
-
-            function loginn() {
-
-         // var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
-         // db.transaction(queryDB, errorCB);
-
-            }
-
-
-
-            function queryDB(tx) {
-                tx.executeSql('SELECT * FROM UserHistory', [], querySuccess, errorCB);
-            }
-
-            function querySuccess(tx, results) {
-                var len = results.rows.length;
-                if (len == 0) {
-                    $("#LoginPanel").show();
-                }
-                else {
-                    window.location.replace("interest.html");
-                }
-            }
-
-            function errorCB(err) {
-                $("#LoginPanel").show();
-            }
-
-
-
-
-
-            $('#Firsti').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-first-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-first-txt").removeClass("input-alert");
-
-                }
-            });
-            $('#Lasts').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-last-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-last-txt").removeClass("input-alert");
-
-                }
-            });
-
-            $('#emails').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-email-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-email-txt").removeClass("input-alert");
-                    IsEmailExists();
-                }
-            });
-
-            $('#UserPassword').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-pswd-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-pswd-txt").removeClass("input-alert");
-
-                }
-            });
-
-            $('#PasswordConfirm').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-pswd-txtPassword").addClass("input-alert");
-                }
-                else {
-                    $(".signup-pswd-txtPassword").removeClass("input-alert");
-
-                }
-            });
-
-            //  $(".input - alert").hide();
-
-            // OPERATIONS ON FOCUS OF EMAIL TEXT BOX IN LOGIN PAGE
-
-            $('#emailLogin').blur(function () {
-                if ($("#emailLogin").val() == "") {
-                    $(".username-txt").addClass("input-alert");
-                }
-                else {
-                    $(".username-txt").removeClass("input-alert");
-
-
-                }
-            });
-
-            // OPERATIONS ON FOCUS OF PASSWORD TEXT BOX IN LOGIN PAGE
-
-            $('#passwordLogin').blur(function () {
-                if ($("#passwordLogin").val() == "") {
-                    $(".pswd-txt").addClass("input-alert");
-                }
-                else {
-                    $(".pswd-txt").removeClass("input-alert");
-
-
-                }
-            });
-
-            $('#Firsti').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-first-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-first-txt").removeClass("input-alert");
-
-                }
-            });
-            $('#Lasts').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-last-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-last-txt").removeClass("input-alert");
-
-                }
-            });
-
-            $('#emails').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-email-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-email-txt").removeClass("input-alert");
-
-                }
-            });
-
-            $('#UserPassword').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-pswd-txt").addClass("input-alert");
-                }
-                else {
-                    $(".signup-pswd-txt").removeClass("input-alert");
-
-                }
-            });
-
-            $('#PasswordConfirm').blur(function () {
-                if ($(this).val() == "") {
-                    $(".signup-pswd-txtPassword").addClass("input-alert");
-                }
-                else {
-                    $(".signup-pswd-txtPassword").removeClass("input-alert");
-
-                }
-            });
-            $('#submit').on("click", function () {
-
-                if ($("#Firsti").val() == "") {
-                    $('.flex').css("display", "block");
-                    $(".message-area").text("first name cant be empty");
-                    $(".alert-box").show();
-                    e.preventDefault();
-
-                }
-                if ($("#Lasts").val() == "") {
-                    $('.flex').css("display", "block");
-                    $(".message-area").text("last name cant be empty");
-                    $(".alert-box").show();
-                    e.preventDefault();
-
-                }
-                var sEmail = $('#emails').val();
-                if (sEmail.length == "") {
-                    $('.flex').css("display", "block");
-                    $(".message-area").text("email name cant be empty");
-                    $(".alert-box").show();
-                    e.preventDefault();
-                }
-                if (validateEmail(sEmail)) {
-                    // alert('Email is valid');
-                    IsEmailExists();
-                   
-
-                }
-                else {
-                    $('.flex').css("display", "block");
-              
-                    e.preventDefault();
-                    IsEmailExists();
-                }
-
-
-                var Password = $("#UserPassword").val();
-                if (Password.length == "") {
-                    $(".message-area").text("password cant be empty");
-                    $('.flex').css("display", "block");
-                    $(".alert-box").show();
-                    e.preventDefault();
-                }
-
-                if ($.trim(Password).length < 6) {
-                    $(".message-area").text("password must be 6 chararcter long");
-                    $('.flex').css("display", "block");
-                    $(".alert-box").show();
-                    e.preventDefault();
-                }
-
-
-
-                var ConfirmPassword = $("#PasswordConfirm").val();
-
-                if (ConfirmPassword.length == "") {
-                    $(".message-area").text("confirm password cant be empty");
-                    $('.flex').css("display", "block");
-                    $(".alert-box").show();
-                    e.preventDefault();
-                }
-
-
-                var match1 = $("#PasswordConfirm").val();
-                var match2 = $("#UserPassword").val();
-
-                if (match1 == match2) {
-
-                }
-                else {
-                    $(".message-area").text("password didn't match!!! Please try again");
-                    $('.flex').css("display", "block");
-                    $(".alert-box").show();
-                    e.preventDefault();
-                }
-
-                AddNewUser();
-
-            });
-
-
-
-            $("#cancel").on("click", function () {
-                $("#emailLogin,#passwordLogin").val("");
-
-            });
-
-            $("#cancelSubmit").on("click", function () {
-                $("#SignUp").addClass('modal');
-                $("#LoginPanel").show();
-            });
-
-
-            $("#okAlert").on("click", function () {
-                $('.alert-box').hide();
-                $('.flex').css("display", "none");
-
-
-            });
-
-
-
-            $("#login").on("click", function () {
-                {
-
-                    if ($("#emailLogin").val() == "") {
-                        $('.flex').css("display", "block");
-                        $(".message-area").text('email address cant be empty');
-                        $(".alert-box").show();
-                        e.preventDefault();
-                    }
-
-                    if ($("#passwordLogin").val() == "") {
-                        $('.flex').css("display", "block");
-                        $(".message-area").text('password cant be empty');
-                        $(".alert-box").show();
-
-                        e.preventDefault();
-                    }
-
-
-                    window.localStorage.setItem("login", "login");
-                    localStorage.setItem("EmailId", $("#emailLogin").val());
-                    localStorage.setItem("password", $("#passwordLogin").val());
-
-
-
-                    validateUser();
-
-                    //    window.location.replace("interest.html");
-                    //   }
-                }
-            });
-        });
-
-        function createDatabase() {
-        // var db = window.openDatabase("Database", "1.0", "UserHistory", 1000000);
-        // db.transaction(populateDB, errorCB, successCB);
-
-        }
-
-
-        function populateDB(tx) {
-
-            var email = window.localStorage.getItem("EmailId");
-            var password = window.localStorage.getItem("password");
-
-            tx.executeSql('DROP TABLE IF EXISTS UserHistory');
-            tx.executeSql('CREATE TABLE UserHistory (email,passwords)');
-            tx.executeSql("insert into UserHistory (email,passwords) values(?,?)", [email, password]);
-
-        }
-
-        function errorCB(tx, err) {
-            // alert("Error processing SQL: aw" + err);
-        }
-
-        // Transaction success callback
-        function successCB() {
-            //  alert("success!");
-
-        }
-        function facebook() {
-            flag = 1;
-        }
-
-        function cancel() {
-            if (flag == 0) {
-                $("#Firsti,#Lasts,#emails,#UserPassword,#PasswordConfirm").val("");
-            }
-
-        }
-
-     //   openFB.init('1470561406508988');
-     facebookConnectPlugin.browserInit('1450488571887143');
-var fbSuccess= function(userData)
-{
-    alert(1);
-    alert("UserInfo: " + JSON.stringify(userData));
-    facebookConnectPlugin.getLoginStatus(
-                                         function (status) {
-                                         alert("current status: " + JSON.stringify(status));
-                                         
-                                         var options = { method:"feed" };
-                                         facebookConnectPlugin.showDialog(options,
-                                                                          function (result) {
-                                                                          alert("Posted. " + JSON.stringify(result));             },
-                                                                          function (e) {
-                                                                          alert("Failed: " + e);
-                                                                          });
-                                         }
-                                         );};
     
+    <head>
+        
+        <meta charset="utf-8">
+            
+            <title>Untitled Document</title>
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+                <link href="css/style.css" rel="stylesheet" type="text/css">
+                    
+                    <link href="css/ratchet.css" rel="stylesheet" />
+                    
+                    <link href="css/toastr.min.css" rel="stylesheet" />
+                    
+    </head>
+    
+    
+    
+    <body>
+        
+        
+        
+        <div>
+            
+            <div class="flex" style="display: none;"> </div>
+            
+            <div id="loaderImage" style="display: none;">
+                
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        <div class="alert-box" >
+            
+            <h4>MY6</h4>
+            
+            <div class="message-area"></div>
+            
+            <div class="alert-btn-area">
+                
+                <button id="okAlert" class="alert-btn" >ok</button>
+                
+                
+                
+            </div>
+            
+        </div>
+        
+        <!--  main div class -->
+        
+        <div class="splash-bg">
+            
+            
+            
+            <!--  logo is first displayed as splash screen
+             
+             <div id="logoPanel" style="width: 100%; float: left">
+             
+             <div class="logo">
+             
+             <img src="img/splash-logo.png">
+             
+             </div>
+             
+             </div>-->
+            
+            
+            
+            <!-- Login div; user can input registered username and email -->
+            
+            <div id="LoginPanel" style="width: 100%; float: left; margin-right: 100%;" class="overflow-div">
+                
+                <div class="logo-login">
+                    
+                    <img src="img/splash-logo.png">
+                        
+                        </div>
+                
+                <div class="lowerContent signin-form">
+                    
+                    
+                    
+                    <!--  email textbox -->
+                    
+                    
+                    
+                    <div class="username-txt">
+                        
+                        <input id="emailLogin" type="email" placeholder="Email" class="user-input" alt="">
+                            
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!-- password textbox -->
+                    
+                    <div class="pswd-txt">
+                        
+                        <input id="passwordLogin" class="user-password" type="password" placeholder="Password" alt="">
+                            
+                            </div>
+                    
+                    
+                    
+                    <div>
+                        
+                        <!-- login Button -->
+                        
+                        <div class="login-btn fl" id="login" data-transition="fade">Login</div>
+                        
+                        <!-- cancel Button -->
+                        
+                        <div id="cancel" class="login-btn fr">Cancel</div>
+                        
+                        <div class="clr"></div>
+                        
+                    </div>
+                    
+                    
+                    
+                    <!-- login through Facebook -->
+                    
+                    <div class="or" style="color: white">Or</div>
+                    
+                    <div class="facebook" style="color: white" onclick="login();">
+                        
+                        Sign in with
+                        
+                        <a>
+                            
+                            <img src="img/facebook-icon-white.png" class="fr" onclick="login();"></a>
+                        
+                    </div>
+                    
+                    
+                    
+                    <!-- Need an account button -->
+                    
+                    <a href="#SignUp">
+                        
+                        <div class="need-acnt" onclick="javascript:cancel();">Need An Account?</div>
+                        
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <!-- Sign Up div; -->
+            
+            <div id="SignUp" style="width: 100%; float: left;z-index:100" class=" modal ModalBackground overflow-div">
+                
+                <div class="splash-bg">
+                    
+                    <div class="logo-login">
+                        
+                        <img id="images" src="img/splash-logo.png" />
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="lowerContent signup-form">
+                        
+                        
+                        
+                        <div class="signup-first-txt">
+                            
+                            <input id="Firsti" class="user-input" type="text" placeholder="Enter First Name" />
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="signup-last-txt">
+                            
+                            <input class="user-input" id="Lasts" type="text" placeholder="Enter Last Name" />
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="signup-email-txt">
+                            
+                            <input class="user-input" id="emails" type="email" placeholder="Email" />
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="signup-pswd-txt">
+                            
+                            <input class="user-input" id="UserPassword" type="password" placeholder="Password" />
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="signup-pswd-txt">
+                            
+                            <input id="PasswordConfirm" class="user-input" type="password" placeholder="Confirm Password" />
+                            
+                        </div>
+                        
+                        
+                        
+                        <a href="#SignUp" id="cancelSubmit" class="signup-btn fl">Cancel</a>
+                        
+                        <a id="submit" class="signup-btn fr">Submit</a>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        <script src="js/ratchet.js"></script>
+        
+        <script src="js/jquery-2.0.2.js"></script>
+        
+        <script src="cordova.js"></script>
+        
+      
+        
+        <script src="js/loader.js"></script>
+        
+        <script src="js/toastr.min.js"></script>
+        
+        <script src="js/appConfig.js"></script>
+        
+        <script>
+            
+            
+            
+            var flag = 0;
+            
+            $(document).ready(function () {
+                              
+                              
+                              
+                              // alert(localStorage.getItem("email"));
+                              
+                              $(".alert-box").hide();
+                              
+                              $("#LoginPanel,#loaderImage").hide();
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              var start = localStorage.getItem("start");
+                              
+                              
+                              
+                              if (start == null) {
+                              
+                              $("#LoginPanel").show();
+                              
+                               var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
+                              
+                               db.transaction(queryDB, errorCB);
+                              
+                              }
+                              
+                              else {
+                              
+                              
+                              
+                              $("#logoPanel").hide();
+                              
+                              $("#LoginPanel").show();
+                              
+                              
+                              
+                              }
+                              
+                              
+                              
+                              function loginn() {
+                              
+                              
+                              
+                               var db = window.openDatabase("Database", "1.0", "UserHistory", 200000);
+                              
+                               db.transaction(queryDB, errorCB);
+                              
+                              
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              function queryDB(tx) {
+                              
+                              tx.executeSql('SELECT * FROM UserHistory', [], querySuccess, errorCB);
+                              
+                              }
+                              
+                              
+                              
+                              function querySuccess(tx, results) {
+                              
+                              var len = results.rows.length;
+                              
+                              if (len == 0) {
+                              
+                              $("#LoginPanel").show();
+                              
+                              }
+                              
+                              else {
+                              
+                              window.location.replace("interest.html");
+                              
+                              }
+                              
+                              }
+                              
+                              
+                              
+                              function errorCB(err) {
+                              
+                              $("#LoginPanel").show();
+                              
+                              }
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              $('#Firsti').blur(function () {
+                                                
+                                                if ($(this).val() == "") {
+                                                
+                                                $(".signup-first-txt").addClass("input-alert");
+                                                
+                                                }
+                                                
+                                                else {
+                                                
+                                                $(".signup-first-txt").removeClass("input-alert");
+                                                
+                                                
+                                                
+                                                }
+                                                
+                                                });
+                              
+                              $('#Lasts').blur(function () {
+                                               
+                                               if ($(this).val() == "") {
+                                               
+                                               $(".signup-last-txt").addClass("input-alert");
+                                               
+                                               }
+                                               
+                                               else {
+                                               
+                                               $(".signup-last-txt").removeClass("input-alert");
+                                               
+                                               
+                                               
+                                               }
+                                               
+                                               });
+                              
+                              
+                              
+                              $('#emails').blur(function () {
+                                                
+                                                if ($(this).val() == "") {
+                                                
+                                                $(".signup-email-txt").addClass("input-alert");
+                                                
+                                                }
+                                                
+                                                else {
+                                                
+                                                $(".signup-email-txt").removeClass("input-alert");
+                                                
+                                                IsEmailExists();
+                                                
+                                                }
+                                                
+                                                });
+                              
+                              
+                              
+                              $('#UserPassword').blur(function () {
+                                                      
+                                                      if ($(this).val() == "") {
+                                                      
+                                                      $(".signup-pswd-txt").addClass("input-alert");
+                                                      
+                                                      }
+                                                      
+                                                      else {
+                                                      
+                                                      $(".signup-pswd-txt").removeClass("input-alert");
+                                                      
+                                                      
+                                                      
+                                                      }
+                                                      
+                                                      });
+                              
+                              
+                              
+                              $('#PasswordConfirm').blur(function () {
+                                                         
+                                                         if ($(this).val() == "") {
+                                                         
+                                                         $(".signup-pswd-txtPassword").addClass("input-alert");
+                                                         
+                                                         }
+                                                         
+                                                         else {
+                                                         
+                                                         $(".signup-pswd-txtPassword").removeClass("input-alert");
+                                                         
+                                                         
+                                                         
+                                                         }
+                                                         
+                                                         });
+                              
+                              
+                              
+                              //  $(".input - alert").hide();
+                              
+                              
+                              
+                              // OPERATIONS ON FOCUS OF EMAIL TEXT BOX IN LOGIN PAGE
+                              
+                              
+                              
+                              $('#emailLogin').blur(function () {
+                                                    
+                                                    if ($("#emailLogin").val() == "") {
+                                                    
+                                                    $(".username-txt").addClass("input-alert");
+                                                    
+                                                    }
+                                                    
+                                                    else {
+                                                    
+                                                    $(".username-txt").removeClass("input-alert");
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    }
+                                                    
+                                                    });
+                              
+                              
+                              
+                              // OPERATIONS ON FOCUS OF PASSWORD TEXT BOX IN LOGIN PAGE
+                              
+                              
+                              
+                              $('#passwordLogin').blur(function () {
+                                                       
+                                                       if ($("#passwordLogin").val() == "") {
+                                                       
+                                                       $(".pswd-txt").addClass("input-alert");
+                                                       
+                                                       }
+                                                       
+                                                       else {
+                                                       
+                                                       $(".pswd-txt").removeClass("input-alert");
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       }
+                                                       
+                                                       });
+                              
+                              
+                              
+                              $('#Firsti').blur(function () {
+                                                
+                                                if ($(this).val() == "") {
+                                                
+                                                $(".signup-first-txt").addClass("input-alert");
+                                                
+                                                }
+                                                
+                                                else {
+                                                
+                                                $(".signup-first-txt").removeClass("input-alert");
+                                                
+                                                
+                                                
+                                                }
+                                                
+                                                });
+                              
+                              $('#Lasts').blur(function () {
+                                               
+                                               if ($(this).val() == "") {
+                                               
+                                               $(".signup-last-txt").addClass("input-alert");
+                                               
+                                               }
+                                               
+                                               else {
+                                               
+                                               $(".signup-last-txt").removeClass("input-alert");
+                                               
+                                               
+                                               
+                                               }
+                                               
+                                               });
+                              
+                              
+                              
+                              $('#emails').blur(function () {
+                                                
+                                                if ($(this).val() == "") {
+                                                
+                                                $(".signup-email-txt").addClass("input-alert");
+                                                
+                                                }
+                                                
+                                                else {
+                                                
+                                                $(".signup-email-txt").removeClass("input-alert");
+                                                
+                                                
+                                                
+                                                }
+                                                
+                                                });
+                              
+                              
+                              
+                              $('#UserPassword').blur(function () {
+                                                      
+                                                      if ($(this).val() == "") {
+                                                      
+                                                      $(".signup-pswd-txt").addClass("input-alert");
+                                                      
+                                                      }
+                                                      
+                                                      else {
+                                                      
+                                                      $(".signup-pswd-txt").removeClass("input-alert");
+                                                      
+                                                      
+                                                      
+                                                      }
+                                                      
+                                                      });
+                              
+                              
+                              
+                              $('#PasswordConfirm').blur(function () {
+                                                         
+                                                         if ($(this).val() == "") {
+                                                         
+                                                         $(".signup-pswd-txtPassword").addClass("input-alert");
+                                                         
+                                                         }
+                                                         
+                                                         else {
+                                                         
+                                                         $(".signup-pswd-txtPassword").removeClass("input-alert");
+                                                         
+                                                         
+                                                         
+                                                         }
+                                                         
+                                                         });
+                              
+                              $('#submit').on("click", function () {
+                                              
+                                              
+                                              
+                                              if ($("#Firsti").val() == "") {
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".message-area").text("first name cant be empty");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              
+                                              
+                                              }
+                                              
+                                              if ($("#Lasts").val() == "") {
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".message-area").text("last name cant be empty");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              
+                                              
+                                              }
+                                              
+                                              var sEmail = $('#emails').val();
+                                              
+                                              if (sEmail.length == "") {
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".message-area").text("email name cant be empty");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              }
+                                              
+                                              if (validateEmail(sEmail)) {
+                                              
+                                              // alert('Email is valid');
+                                              
+                                              IsEmailExists();
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              }
+                                              
+                                              else {
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              
+                                              
+                                              e.preventDefault();
+                                              
+                                              IsEmailExists();
+                                              
+                                              }
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              var Password = $("#UserPassword").val();
+                                              
+                                              if (Password.length == "") {
+                                              
+                                              $(".message-area").text("password cant be empty");
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              }
+                                              
+                                              
+                                              
+                                              if ($.trim(Password).length < 6) {
+                                              
+                                              $(".message-area").text("password must be 6 chararcter long");
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              }
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              var ConfirmPassword = $("#PasswordConfirm").val();
+                                              
+                                              
+                                              
+                                              if (ConfirmPassword.length == "") {
+                                              
+                                              $(".message-area").text("confirm password cant be empty");
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              }
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              var match1 = $("#PasswordConfirm").val();
+                                              
+                                              var match2 = $("#UserPassword").val();
+                                              
+                                              
+                                              
+                                              if (match1 == match2) {
+                                              
+                                              
+                                              
+                                              }
+                                              
+                                              else {
+                                              
+                                              $(".message-area").text("password didn't match!!! Please try again");
+                                              
+                                              $('.flex').css("display", "block");
+                                              
+                                              $(".alert-box").show();
+                                              
+                                              e.preventDefault();
+                                              
+                                              }
+                                              
+                                              
+                                              
+                                              AddNewUser();
+                                              
+                                              
+                                              
+                                              });
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              $("#cancel").on("click", function () {
+                                              
+                                              $("#emailLogin,#passwordLogin").val("");
+                                              
+                                              
+                                              
+                                              });
+                              
+                              
+                              
+                              $("#cancelSubmit").on("click", function () {
+                                                    
+                                                    $("#SignUp").addClass('modal');
+                                                    
+                                                    $("#LoginPanel").show();
+                                                    
+                                                    });
+                              
+                              
+                              
+                              
+                              
+                              $("#okAlert").on("click", function () {
+                                               
+                                               $('.alert-box').hide();
+                                               
+                                               $('.flex').css("display", "none");
+                                               
+                                               
+                                               
+                                               
+                                               
+                                               });
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              $("#login").on("click", function () {
+                                             
+                                             {
+                                             
+                                             
+                                             
+                                             if ($("#emailLogin").val() == "") {
+                                             
+                                             $('.flex').css("display", "block");
+                                             
+                                             $(".message-area").text('email address cant be empty');
+                                             
+                                             $(".alert-box").show();
+                                             
+                                             e.preventDefault();
+                                             
+                                             }
+                                             
+                                             
+                                             
+                                             if ($("#passwordLogin").val() == "") {
+                                             
+                                             $('.flex').css("display", "block");
+                                             
+                                             $(".message-area").text('password cant be empty');
+                                             
+                                             $(".alert-box").show();
+                                             
+                                             
+                                             
+                                             e.preventDefault();
+                                             
+                                             }
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             window.localStorage.setItem("login", "login");
+                                             
+                                             localStorage.setItem("EmailId", $("#emailLogin").val());
+                                             
+                                             localStorage.setItem("password", $("#passwordLogin").val());
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             validateUser();
+                                             
+                                             
+                                             
+                                             //    window.location.replace("interest.html");
+                                             
+                                             //   }
+                                             
+                                             }
+                                             
+                                             });
+                              
+                              });
+                              
+                              
+                              
+                              function createDatabase() {
+                                  
+                                   var db = window.openDatabase("Database", "1.0", "UserHistory", 1000000);
+                                  
+                                   db.transaction(populateDB, errorCB, successCB);
+                                  
+                                  
+                                  
+                              }
+        
+        
+        
+        
+        
+        function populateDB(tx) {
+            
+            
+            
+            var email = window.localStorage.getItem("EmailId");
+            
+            var password = window.localStorage.getItem("password");
+            
+            
+            
+            tx.executeSql('DROP TABLE IF EXISTS UserHistory');
+            
+            tx.executeSql('CREATE TABLE UserHistory (email,passwords)');
+            
+            tx.executeSql("insert into UserHistory (email,passwords) values(?,?)", [email, password]);
+            
+            
+            
+        }
+        
+        
+        
+        function errorCB(tx, err) {
+            
+            // alert("Error processing SQL: aw" + err);
+            
+        }
+        
+        
+        
+        // Transaction success callback
+        
+        function successCB() {
+            
+            //  alert("success!");
+            
+            
+            
+        }
+        
+        function facebook() {
+            
+            flag = 1;
+            
+        }
+        
+        
+        
+        function cancel() {
+            
+            if (flag == 0) {
+                
+                $("#Firsti,#Lasts,#emails,#UserPassword,#PasswordConfirm").val("");
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        //   openFB.init('1470561406508988');
+        
+        facebookConnectPlugin.browserInit('1450488571887143');
+        
+        var fbSuccess= function(userData)
+        
+        {
+            
+            
+            
+            alert("UserInfo: " + JSON.stringify(userData));
+            
+            facebookConnectPlugin.getLoginStatus(
+                                                 
+                                                 function (status) {
+                                                 
+                                                 alert("current status: " + JSON.stringify(status));
+                                                 
+                                                 
+                                                 
+                                                 var options = { method:"feed" };
+                                                 
+                                                 facebookConnectPlugin.showDialog(options,
+                                                                                  
+                                                                                  function (result) {
+                                                                                  
+                                                                                  alert("Posted. " + JSON.stringify(result));             },
+                                                                                  
+                                                                                  function (e) {
+                                                                                  
+                                                                                  alert("Failed: " + e);
+                                                                                  
+                                                                                  });
+                                                 
+                                                 }
+                                                 
+                                                 );};
+        
+        
+        
         function login() {
             
             
+            
+            
+            
+            
+            
+            
+            
+            //  $("#SignUp").removeClass('modal');
+            
+            // $("#SignUp").show();
+            
+            //  $("#LoginPanel").hide();
+            
+            //            openFB.login('email',
+            
+            //                    function () {
+            
+            //                        //  alert('Facebook login succeeded');
+            
+            //                        getInfo();
+            
+            //
+            
+            //                    },
+            
+            //                    function (error) {
+            
+            //                        $(".message-area").text('Facebook login failed: ' + error.error_description);
+            
+            //                        $('.flex').css("display", "block");
+            
+            //                        $(".alert-box").show();
+            
+            //                    });
+        
+           facebookConnectPlugin.login(["user_birthday"],function(userData)
+                                        
+                                        
+    
+                                        {
 
+                                        facebookConnectPlugin.api("/me", ["user_birthday"],
+                                                                  
+                                                                  function (result) {
+                                                                  
+                                                                  
+                                                                  
+                                                                  $("#SignUp").removeClass('modal');
+                                                                  
+                                                                  $("#SignUp").show();
+                                                                  
+                                                                  $("#LoginPanel").hide();
+                                                                  
+                                                                  getInfo(result);
+                                                                  
+                                                                  },
+                                                                  
+                                                                  function (error) {
+                                                                  
+                                                                  alert("Failed: " + error);
+                                                                  
+                                                                  });
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        }, function (error) {
+                                        
+                                        $(".message-area").text('Facebook login failed: ' + error);
+                                        
+                                        $('.flex').css("display", "block");
+                                        
+                                        $(".alert-box").show();
+                                        
+                                        });
 
-          //  $("#SignUp").removeClass('modal');
-           // $("#SignUp").show();
-          //  $("#LoginPanel").hide();
-//            openFB.login('email',
-//                    function () {
-//                        //  alert('Facebook login succeeded');
-//                        getInfo();
-//
-//                    },
-//                    function (error) {
-//                        $(".message-area").text('Facebook login failed: ' + error.error_description);
-//                        $('.flex').css("display", "block");
-//                        $(".alert-box").show();
-//                    });
-                    facebookConnectPlugin.login(["user_birthday"],function(userData)
-                                    
-                                                {
-                    facebookConnectPlugin.api("/me", ["user_birthday"],
-                                        function (result) {
-                                                                         
-                                            $("#SignUp").removeClass('modal');
-                                            $("#SignUp").show();
-                                            $("#LoginPanel").hide();
-                                              getInfo(result);
-                                                                          },
-                                                                          function (error) {
-                                                                          alert("Failed: " + error);
-                                                                          });
- 
-                                                
-                                                
-                                                
-                                               }, function (error) {
-                                                $(".message-area").text('Facebook login failed: ' + error);
-                                                $('.flex').css("display", "block");
-                                                $(".alert-box").show();
-                                                });
-       }
-
+                                        
+                                        
+                                        
+                                        
+                                       // window.plugins.toast.show('Hello there!', 'long', 'center', function(a){}, function(b){});
+                                        
+        }
+        
+        
+        
         function getInfo(result) {
-//            openFB.api({
-//                path: '/me',
-//                success: function (data) {
-//
-//                    console.log(JSON.stringify(data));
-//
-//                    urls = 'http://graph.facebook.com/' + data.id + '/picture?type=large';
-//                    localStorage.setItem("facebookUrl", urls);
-//                    localStorage.setItem("ProfilePic", urls);
-//                    //  window.localStorage.setItem("url", urls);
-//                    //   var new_Img= document.getElementById("images");
-//                    //   new_Img.src= urls;
-//                    var names = data.name.split(" ");
-//
-//                    $("#Firsti").val(names[0]);
-//                    $("#Lasts").val(names[1]);
-//                    $("#emails").val(data.email);
-//                    flag = 0;
-//                },
-//                error: errorHandler
-//            });
-
+            
+            //            openFB.api({
+            
+            //                path: '/me',
+            
+            //                success: function (data) {
+            
+            //
+            
+            //                    console.log(JSON.stringify(data));
+            
+            //
+            
+            //                    urls = 'http://graph.facebook.com/' + data.id + '/picture?type=large';
+            
+            //                    localStorage.setItem("facebookUrl", urls);
+            
+            //                    localStorage.setItem("ProfilePic", urls);
+            
+            //                    //  window.localStorage.setItem("url", urls);
+            
+            //                    //   var new_Img= document.getElementById("images");
+            
+            //                    //   new_Img.src= urls;
+            
+            //                    var names = data.name.split(" ");
+            
+            //
+            
+            //                    $("#Firsti").val(names[0]);
+            
+            //                    $("#Lasts").val(names[1]);
+            
+            //                    $("#emails").val(data.email);
+            
+            //                    flag = 0;
+            
+            //                },
+            
+            //                error: errorHandler
+            
+            //            });
+            
+            
+            
+            
             
             $("#Firsti").val(result.first_name);
-                            $("#Lasts").val(result.last_name);
-                            $("#emails").val(result.email);
-
+            
+            $("#Lasts").val(result.last_name);
+            
+            $("#emails").val(result.email);
+            
+            
+            
+            
             
         }
-
-
+        
+        
+        
+        
+        
         function errorHandler(error) {
+            
             //   alert("this" + error.message);
+            
         }
+        
         function validateEmail(sEmail) {
+            
             var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            if (filter.test(sEmail)) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        function validatePassword(Password) {
-            var filter = /^(?=.*\d)[0-9a-zA-Z]{8,}$/;
-
-
-
-            if (filter.test(Password)) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-    </script>
-     <script src="js/loader.js"></script>
-    <script src="js/my6.js"></script>
-    <script src="js/toastr.min.js"></script>
-</body>
+                                          
+                                          if (filter.test(sEmail)) {
+                                          
+                                          return true;
+                                          
+                                          }
+                                          
+                                          else {
+                                          
+                                          return false;
+                                          
+                                          }
+                                          
+                                          }
+                                          
+                                          
+                                          
+                                          function validatePassword(Password) {
+                                          
+                                          var filter = /^(?=.*\d)[0-9a-zA-Z]{8,}$/;
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          if (filter.test(Password)) {
+                                          
+                                          return true;
+                                          
+                                          }
+                                          
+                                          else {
+                                          
+                                          return false;
+                                          
+                                          }
+                                          
+                                          }
+                                          
+                                          </script>
+        
+        <script src="js/loader.js"></script>
+        
+        <script src="js/my6.js"></script>
+        
+        <script src="js/toastr.min.js"></script>
+        
+    </body>
+    
 </html>
+

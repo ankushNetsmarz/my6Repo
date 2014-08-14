@@ -67,6 +67,7 @@ function showLoader() {
 $(document).on("click", ".connect-pic", function () {
     var profile= $(this).attr('userId');
     localStorage.setItem("profileId", profile);
+
     var pathName = $(location).attr('href').substring($(location).attr('href').lastIndexOf('/') + 1);
     window.localStorage.setItem("pathName", pathName);
     window.location.replace("userProfile.html");

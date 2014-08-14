@@ -259,8 +259,8 @@ function AddFeed(imageURL) {
         data: inputdata,
         success: function (results) {
             console.log(results);
-            toastr.success("feed added");
-
+           
+           window.plugins.toast.show('Feed Added!', 'long', 'center', function(a){}, function(b){});
         }
     }).done(function () {
         hideLoader();

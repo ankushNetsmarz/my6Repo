@@ -87,8 +87,9 @@ function UpdateUser() {
         url: "http://174.141.233.6/MY6/api/user/UpdateUser",
         data: userData,
         success: function (data) {
-          toastr.success("profile updated");
+         
            
+window.plugins.toast.show('Profile Updated !', 'long', 'center', function(a){}, function(b){});
             GetUserData();
         },
         error: function (xhr) {
@@ -129,23 +130,39 @@ function GetUserData() {
               
             }
         
-           
-         
-       
+           var Gender = data.ResponseData[0].Gender;
+           var DOB = data.ResponseData[0].DOB;
+           var LocationAddress = data.ResponseData[0].LocationAddress;
+           var status = data.ResponseData[0].Status;
+           var ContactNo= data.ResponseData[0].ContactNo;
+            if (Gender == null) {
+                Gender = "Not Available";
+            }
+            if (DOB == null) {
+                DOB = "";
+            }
+            if (LocationAddress == null) {
+                LocationAddress = "Not Available";
+            }
+            if (status == null) {
+                status = "no status";
+            }
           
-        
+            if (ContactNo == null) {
+                ContactNo = "Not Available";
+            }
             localStorage.setItem("ProfilePic",profilePic);
             //    alert(data.ResponseData[0].interestsID);
             user.rating = data.ResponseData[0].UserRating;
             user.id = data.ResponseData[0].UserID;
             user.FirstName = data.ResponseData[0].FirstName;
             user.LastName = data.ResponseData[0].LastName;
-            user.DOB = data.ResponseData[0].DOB;
-            user.ContactNo = data.ResponseData[0].ContactNo;
-            user.LocationAddress = data.ResponseData[0].LocationAddress;
-            user.Gender = data.ResponseData[0].Gender;
+            user.DOB = DOB;
+            user.ContactNo = ContactNo;
+            user.LocationAddress = LocationAddress;
+            user.Gender = Gender;
             user.interests = data.ResponseData[0].interests;
-            user.status =data.ResponseData[0].Status;
+            user.status = status;
            
             
             var interestResponse = data.ResponseData[0].interests;
@@ -202,7 +219,9 @@ function AddInterests() {
         data: inputdata,
         success: function (data) {
             console.log(data);
-            toastr.success("interest added");
+           // toastr.success("interest added");
+           
+window.plugins.toast.show('Interest Added !', 'long', 'center', function(a){}, function(b){});
         },
         error: function (xhr) {
             $(".message-area").text(xhr.responseText);
@@ -263,17 +282,36 @@ function validateUser() {
         		{
         	    createDatabase();
 
-        	  
+        	    var Gender = data.ResponseData[0].Gender;
+        	    var DOB = data.ResponseData[0].DOB;
+        	    var LocationAddress = data.ResponseData[0].LocationAddress;
+        	    var status = data.ResponseData[0].Status;
+        	    var ContactNo = data.ResponseData[0].ContactNo;
+        	    if (Gender == null) {
+        	        Gender = "Not Available";
+        	    }
+        	    if (DOB == null) {
+        	        DOB = "";
+        	    }
+        	    if (LocationAddress == null) {
+        	        LocationAddress = "Not Available";
+        	    }
+        	    if (status == null) {
+        	        status = "no status";
+        	    }
+        	    if (ContactNo == null) {
+        	        ContactNo = "Not Available";
+        	    }
         	  user.rating = data.ResponseData[0].UserRating;
             user.id = data.ResponseData[0].UserID;
             user.FirstName = data.ResponseData[0].FirstName;
             user.LastName = data.ResponseData[0].LastName;
-            user.DOB = data.ResponseData[0].DOB;
-            user.ContactNo = data.ResponseData[0].ContactNo;
-            user.LocationAddress = data.ResponseData[0].LocationAddress;
-            user.Gender = data.ResponseData[0].Gender;
+            user.DOB = DOB;
+            user.ContactNo = ContactNo;
+            user.LocationAddress = LocationAddress;
+            user.Gender = Gender;
             user.interests = data.ResponseData[0].interests;
-            user.status =data.ResponseData[0].Status;
+            user.status = status;
             localStorage.setItem("userId", data.ResponseData[0].UserID);
 
             localStorage.setItem("ResponseArray", JSON.stringify(user));

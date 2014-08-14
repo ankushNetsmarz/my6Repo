@@ -17,7 +17,9 @@ function AddUserRating(userfeedId, rateValue, userId)
         data: userData,
         success: function (data) {
           
-            toastr.success("Rated");
+          
+           
+           window.plugins.toast.show('Rating Saved!', 'long', 'center', function(a){}, function(b){});
             //alert("success..." + data);
         },
         error: function (xhr) {

@@ -33,20 +33,22 @@ Chandigarh.
             </div>
         </div>
         <div class="mid_area">
-        <div style="overflow-y: scroll; height: 410px;">
-        <div class="message-area">
+        <div >
+        <div style="overflow-y: scroll; height: 310px;" class="message-area">
         </div>
         <div id="message">
-            <div class="comment-type-box">
-                <div class="fl comment-name">
-                    <textarea alt="" id='messageText' class="edit-input" placeholder="Type message" style="width: 100% !important;"></textarea>
-                </div>
-            </div>
+
             <div class="clr"></div>
-            <div>
+<div style="width: 100%;">
+<div class="comment-type-box">
+<div class="fl comment-name">
+<textarea alt="" id='messageText' class="edit-input" placeholder="Type message" style="width: 100% !important;"></textarea>
+</div>
+</div>
                 <a id="sendMessage" class="signup-btn fr">send</a>
+                <a id="cancelInbox" class="signup-btn fl">Cancel</a>
             </div>
-            <a id="cancelInbox" class="signup-btn fl">Cancel</a>
+
         </div>
         </div>
     </div>
@@ -90,7 +92,7 @@ Chandigarh.
         $("#sendMessage").on("click", function () {
 
           SendMessageThread();
-            GetMessage();
+           // GetMessage();
         });
 
         $("#cancelInbox").on("click", function () {

@@ -130,37 +130,36 @@ Chandigarh.
 <img id="profile" src="">
 </div>
 <p class="profile-status">hello</p>
-
+      
 <div class="rate-gall">
 <div id="ratingBar" class="fl" style="margin:8px 0 0;">
 <div class="rateit" id="rateit5"  data-rateit-min="" style="float: none; margin: 0px;"></div>
 <div><span id="value5"></span><span id="hover5"></span></div>
 <div></div>
 </div>
-<a href="" class="fr view-gall"><img src="images/gallery-2.png" width="33"></a>
+<a id="galleryIcons" href="#" class="fr view-gall"><img src="images/gallery-2.png" width="33"></a>
 <div class="clr"></div>
-</div>      
-
+</div>  
 <div class="user-detail">
 <ul>
 <li>
-<div class="fl user-head">Name <span class="fr">|</span></div>
+<div class="fl user-head">Name <span class="fr">:</span></div>
 <div class="fl user-name" id="seeName"></div>
 </li>
 <li>
-<div class="fl user-head">Gender <span class="fr">|</span></div>
+<div class="fl user-head">Gender <span class="fr">:</span></div>
 <div class="fl user-name" id="seeGender"></div>
 </li>
 <li>
-<div class="fl user-head">Location <span class="fr">|</span></div>
+<div class="fl user-head">Location <span class="fr">:</span></div>
 <div class="fl user-name" id="seeLocation"></div>
 </li>
 <li>
-<div class="fl user-head">Contact <span class="fr">|</span></div>
+<div class="fl user-head">contact <span class="fr">:</span></div>
 <div class="fl user-name" id="seeContact"></div>
 </li>
     <li>
-<div class="fl user-head">DOB <span class="fr">|</span></div>
+<div class="fl user-head">DOB <span class="fr">:</span></div>
 <div class="fl user-name" id="seeDOB"></div>
 </li>
 <li>
@@ -179,6 +178,15 @@ Chandigarh.
 
     <script>
         $(document).ready(function () {
+
+            $("#galleryIcons").on("click", function () {
+              
+                window.localStorage.setItem("me", "true");
+
+                window.location.replace("gallery.html");
+
+            });
+
             //  GetUserData() ; 
             $("#rateit5").rateit('readonly', true);
 
@@ -199,9 +207,9 @@ Chandigarh.
             });
             var obj = JSON.parse(localStorage.getItem("ResponseArray"));
             var rating = obj.rating;
-          
+
             $('#rateit5').rateit('value', rating);
-          
+
 
             localStorage.setItem("userId", obj.id);
             $("#seeName").text(obj.FirstName + " " + obj.LastName);
@@ -214,7 +222,7 @@ Chandigarh.
             $(".profile-status").text(obj.status);
             var interest = (obj.interests).split("|");
 
-     for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 6; i++) {
                 switch (interest[i]) {
                     case "My talents":
                         $("#1").show();
@@ -246,7 +254,7 @@ Chandigarh.
                     case "Entertainment":
                         $("#10").show();
                         break;
-                 
+
                 }
             }
 

@@ -17,7 +17,8 @@ function AddProfilePicture(imageURL) {
         data: inputdata,
         success: function (results) {
             console.log(results);
-         
+           
+           window.plugins.toast.show('Picture Updated !', 'long', 'center', function(a){}, function(b){});
         }
     });
 }

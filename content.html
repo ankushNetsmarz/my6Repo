@@ -102,7 +102,7 @@ This page shows the description of particular feed i.2 full photo or a video, it
             <div class="pic-btns-2">
                 <a href="#" class="applause-click-btn like ">APPLAUSE</a>
                 <a href="#modal" class="talk-click-btn comment">COMMENTS</a>
-                <a href="#" class="dollar-btn" id="dollar">$</a>
+                <button class="dollar-btn" id="dollar" onclick="callPaypal(this.id);">$</button>
                 <div class="clr"></div>
             </div>
 
@@ -126,7 +126,7 @@ This page shows the description of particular feed i.2 full photo or a video, it
 
         <div id="modal" class=" modal ModalBackground">
 
-            <div class='comment-list-area-main' style="height: 290px; overflow-y: scroll">
+            <div class='comment-list-area-main' style="height: 360px; overflow-y: scroll">
             </div>
 
             <div class="comment-type-box">
@@ -145,10 +145,11 @@ This page shows the description of particular feed i.2 full photo or a video, it
 
         <div class="clr"></div>
     </div>
-
+ <script src="cordova.js"></script>
+  <script src="js/jquery-2.0.2.js"></script>
     <script src="js/feedliked.js"></script>
     <script src="js/ratchet.js"></script>
-    <script src="js/jquery-2.0.2.js"></script>
+   
     <script src="js/like.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/toastr.min.js"></script>
@@ -301,7 +302,13 @@ This page shows the description of particular feed i.2 full photo or a video, it
                 var pathName = window.localStorage.getItem("pathName");
                 window.location.href = pathName;
               }
-
+function callPaypal(x)
+{
+   
+    var x=document.getElementById(x).innerText;
+     var res = x.substring(1, x.length);
+    window.open('http://adaptive.netsmartz.biz/AdaptivePayment_final.aspx?app_owner_amt=1&biz_owner_email=jasong313@gmail.com&biz_owner_amount='+res+'&buyer_email=ankush199022@gmail.com','_blank','location=no');
+}
     </script>
       <script src="rating/jquery.rateit.js" type="text/javascript"></script>
 

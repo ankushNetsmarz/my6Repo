@@ -15,6 +15,8 @@ var userId = localStorage.getItem("userId");
                 data: inputdata,
                 success: function (results) {
                     console.log(results);
+                   
+                   window.plugins.toast.show('Status Updated !', 'long', 'center', function(a){}, function(b){});
                 }
             });
 

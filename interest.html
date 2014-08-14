@@ -1,4 +1,4 @@
-﻿
+
 <!-- 
 Weexcel software Limited,
 Sector-7C, Madhya Marg,
@@ -65,9 +65,13 @@ Chandigarh.
                             <ul class="nav nav-pill pull-left">
                                 <li class="dropdown" style="width: 100%;">
                                     <!--<ul class="nav nav-pill pull-right">-->
-                                    <div onclick="logout();"><a class="logout">Logout</a></div>
-                                    <!--</ul>-->
-                                     <span id="messageCount1"></span>
+                                    <div onclick="logout();"><a class="fl logout">Logout</a>
+                                        <div class="fr msg-count-main">
+                                    <img src="img/msg-icon.png" width="33"> 
+                                    <span class="msg-count" id="messageCount1">0</span></div>
+                                    <div class="clr"></div>
+                                    </div>
+                                    
                                     <div class="user-pic">
                                         <img class="users" id="userPic" src="img/white-logo-2.png" />
                                     </div>
@@ -79,13 +83,13 @@ Chandigarh.
                                                 <div class="see-profile">
                                                     <div class="see-profile-icon"></div>
                                                 </div>
-                                                <h5>See Your Profile</h5>
+                                                <h5>See Profile</h5>
                                             </li>
                                             <li onclick="edit();">
                                                 <div class="edit-profile">
                                                     <div class="edit-profile-icon"></div>
                                                 </div>
-                                                <h5>Edit Your Profile</h5>
+                                                <h5>Edit Profile</h5>
                                             </li>
                                             <li onclick="uploadImage();">
                                                 <div class="upload-img">
@@ -104,13 +108,13 @@ Chandigarh.
                                                 <div class="my-frnd">
                                                     <div class="my-frnd-icon"></div>
                                                 </div>
-                                                <h5>My Friends</h5>
+                                                <h5>My Connects</h5>
                                             </li>
                                              <li onclick="ConnectPeople();">
                                                 <div class="connect-frnd">
                                                     <div class="connect-frnd-icon"></div>
                                                 </div>
-                                                <h5>Connect People</h5>
+                                                <h5>Get Connected</h5>
                                             </li>
                                                <li onclick="myInbox();">
                                                 <div class="inbox">
@@ -345,7 +349,8 @@ Chandigarh.
                 <div class="tab-text" id="tab5"></div>
             </a>
         </div>
-             <div style="color:white">Press tab to connect</div>
+             <div id="PressTab" style="display:none;color:white">Press tab to connect</div>
+
                  <div  class="connect-list-box" id="profileInfo">
         <div class="profile-pic">
 <img id="profilepic" src="">
@@ -369,14 +374,7 @@ Chandigarh.
 <div class="fl user-name" id="seeLocation"></div>
 </li>
 
-    <li>
-<div class="fl user-head">DOB <span class="fr">:</span></div>
-<div class="fl user-name" id="seeDOB"></div>
-</li>
-<li>
-<div class="fl user-head">Interests <span class="fr">:</span></div>
-<div class="fl user-name" id="seeinterest"></div>
-</li>
+
 </ul>
 </div>
             </div>
@@ -388,10 +386,11 @@ Chandigarh.
         
         </div>
     </div>
-          <script src="js/appConfig.js"></script>
+        
     <script src="js/connect.js"></script>
     <script type="text/javascript" src="iscroll.js"></script>
     <script src="js/jquery-2.0.2.js"></script>
+      <script src="js/appConfig.js"></script>
     <script src="js/jquery.cbFlyout.js"></script>
     <script src="js/main.js"></script>
     <script src="js/ratchet.js"></script>
@@ -460,7 +459,7 @@ Chandigarh.
                    GetFeeds(1,10);
 
                    $(".left-top-btn").show();
-                   $(".top_heading").text("NEWS FEED");
+                   $(".top_heading").text("MY FEED");
                    $(".done_btn_top").removeClass('done_btn_top').addClass("map_btn_top").text('');
                    $(".map_btn_top").css("display", "block");
 
@@ -700,7 +699,7 @@ Chandigarh.
 
                GetUserData();
                $("#interest_Page").animate({ "margin-left": "-=80%" }, 700, logins);
-               $(".top_heading").text("CONNECT");
+               $(".top_heading").text("CONNECTS");
                $("#interest_six").css("display", "none");
                $("#interest_done").attr("id", "connect_done");
                localStorage.setItem("page", "connect");

@@ -21,7 +21,9 @@
         success: function (data) {
             console.log(data);
             $("#messageText").val('');
-            toastr.success("message sent");
+           // toastr.success("message sent");
+           
+           window.plugins.toast.show('Mesasge sent !', 'long', 'center', function(a){}, function(b){});
             //console.log(data.ResponseData.length);
         },
         error: function (xhr) {
@@ -74,7 +76,9 @@ function SendMessageThread() {
         success: function (data) {
             console.log(data);
             $("#messageText").val('');
-            toastr.success("message sent");
+           // toastr.success("message sent");
+           
+           window.plugins.toast.show('Message sent!', 'long', 'center', function(a){}, function(b){});
             //console.log(data.ResponseData.length);
         },
         error: function (xhr) {

@@ -2,7 +2,7 @@
 var userId= localStorage.getItem("userId");
 
 function connectPeople(selecton) {
-	
+  
     var id = selecton;
  
     var HTML = "";

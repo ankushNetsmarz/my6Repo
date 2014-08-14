@@ -26,12 +26,22 @@ function GetProfileData() {
             var LocationAddress = data.ResponseData[0].LocationAddress;
             var interests = data.ResponseData[0].interests;
        
+            if (Gender == null) {
+                Gender = "Not Available";
+            }
+            if (DOB == null) {
+                DOB = "";
+            }
+            if (LocationAddress == null) {
+                LocationAddress = "Not Available";
+            }
+            
             var profilepath= data.ResponseData[0].ProfilePicName;
             var Status=data.ResponseData[0].Status;
             if(Status == null)
             	{
             
-            	Status = "";
+            	Status = "No status";
             	}
             //  var profilepath = data.ResponseData[i].FacebookProfilePicUrl;
                
@@ -134,7 +144,17 @@ function GetProfileDataConnect(userProfileid) {
             var DOB = data.ResponseData[0].DOB;
             var LocationAddress = data.ResponseData[0].LocationAddress;
             var interests = data.ResponseData[0].interests;
-            var profilepath= data.ResponseData[0].ProfilePicName;
+            var profilepath = data.ResponseData[0].ProfilePicName;
+
+            if (Gender == null) {
+                Gender = "Not Available";
+            }
+            if (DOB == null) {
+                DOB = "";
+            }
+            if (LocationAddress == null) {
+                LocationAddress = "Not Available";
+            }
             //  var profilepath = data.ResponseData[i].FacebookProfilePicUrl;
                
               
@@ -185,13 +205,18 @@ function isFriend() {
         success: function (data) {
             console.log(data);
             console.log(data.ResponseData.length);
-            if (data.ResponseData == 1) {
-              
+            if (data.ResponseData == 1)
+            {
+
                 $("#connectButton").hide();
+                $("#disConnect").show();
+                $("#galleryIcon").show();
             }
-            else
+            else {
                 $("#connectButton").show();
-          
+                $("#disConnect").hide();
+                $("#galleryIcon").hide();
+            }
         },
         error: function (xhr) {
            // alert(xhr.responseText);
@@ -205,7 +230,7 @@ function isFriend() {
 
 function connect() {
     var userProfileid = localStorage.getItem("profileId");
-   
+
     var inputdata = {
         "UserID": userId,
         "friendUserID": userProfileid

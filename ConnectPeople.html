@@ -31,7 +31,7 @@ This page shows user's selected interests and corresonding to those interest he 
                 <button type="button" id="connectBack" class="back_btn_top">Back</button>
             </div>
             <div class="top_head_bg">
-                <label class="top_heading">CONNECT</label>
+                <label class="top_heading">CONNECTS</label>
             </div>
         </div>
         <div class="mid_area">
@@ -81,7 +81,7 @@ This page shows user's selected interests and corresonding to those interest he 
 
             <div>
             </div>
-     <div style="color:white">Press tab to connect</div>
+     <div id="PressTab" style="color:white;display:none">Press tab to connect</div>
             <div class="connect-list-box">
                 <ul class="connect">
                 </ul>
@@ -106,7 +106,7 @@ This page shows user's selected interests and corresonding to those interest he 
         var select_ticks, new_id, selecton, select;
 
         $(document).ready(function () {
-
+            $("#PressTab").css("display", "block");
             /* getting 2 arrays containing name of interest and its Id */
 
             var newInterest = JSON.parse(localStorage.getItem("interestResponse"));
@@ -120,7 +120,7 @@ This page shows user's selected interests and corresonding to those interest he 
 
             /* clicking on particular interest will show new people with corresponding interest so as to make him/her as your friend */
             $(".single-item").on("click", function () {
-
+                $("#PressTab").css("display", "none");
                 $(".single-item").removeClass("active");
                 $(this).addClass("active");
 
